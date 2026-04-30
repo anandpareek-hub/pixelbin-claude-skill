@@ -122,23 +122,50 @@ npm install
 
 > Make sure you `cd` into the folder `git clone` actually creates (`pixelbin-claude-skill`). The repo includes `overrides` in `package.json` to keep all transitive dependencies (axios, crypto-js, form-data) on patched versions, so a clean install reports **0 vulnerabilities**.
 
-### 2. Configure
+### 2. Configure (paste two values, you're done)
 
 ```bash
 cp .env.example .env
-# Open .env and fill in your token + cloud name
+# Open .env in any editor
 ```
 
-You need two things:
+Paste your API token and cloud name into `.env`:
+
+```
+PIXELBIN_API_TOKEN=<paste-your-token>
+PIXELBIN_CLOUD_NAME=<your-cloud-name>
+```
 
 | Var | Where to find it |
 | --- | --- |
-| `PIXELBIN_API_TOKEN` | [console.pixelbin.io](https://console.pixelbin.io) → **Settings → Tokens → API Token** (Owner / Admin only) |
-| `PIXELBIN_CLOUD_NAME` | [console.pixelbin.io](https://console.pixelbin.io) → **Settings → Organization** (immutable slug, e.g. `round-dust-e06b92`) |
+| `PIXELBIN_API_TOKEN` | [console.pixelbin.io](https://console.pixelbin.io) → **Settings → Tokens → API Token** |
+| `PIXELBIN_CLOUD_NAME` | [console.pixelbin.io](https://console.pixelbin.io) → **Settings → Organization** (e.g. `round-dust-e06b92`) |
 
 🆓 **Don't have an account?** → [Sign up free](https://www.pixelbin.io/?utm_source=github&utm_medium=claude-skill&utm_campaign=signup)
 
-### 3. Use it with Claude
+### 3. Just chat with Claude
+
+Once `.env` is filled and the skill is loaded, you don't need to learn any commands. Try saying:
+
+> *"Generate a hero image of wireless headphones, soft pastel pink background, square."*
+
+You'll get back a permanent CDN URL like:
+
+<p align="center">
+  <img src="https://cdn.pixelbin.io/v2/dummy-cloudname/original/__pixelbin_console_assets/__ai_image_generator/templates/create-a-hero-shot/preview.jpg" width="280" alt="Sample CDN-hosted output"/>
+</p>
+
+```
+https://cdn.pixelbin.io/v2/<your-cloud>/original/<folder>/headphones-hero.png
+```
+
+Paste it anywhere — site, ad, deck, Instagram. That's it.
+
+More example prompts → see [`skills/pixelbin/INTRO.md`](skills/pixelbin/INTRO.md).
+
+---
+
+## How to load the skill into Claude
 
 Pick the install method that fits your workflow.
 

@@ -1,130 +1,123 @@
-# 👋 Welcome — here's what I can do for you with PixelBin
+# 👋 Hi — I'm your PixelBin assistant
 
-> _Claude reads this file first. When the user has just installed the skill (or hasn't given a clear task), Claude walks them through this menu before doing anything else._
-
----
-
-## 🎯 Pick what you want to build
-
-I can help you with **media + content + page-building** workflows. Here's the menu:
-
-### 1️⃣ Generate AI images
-Bulk-generate marketing visuals, hero shots, lifestyle photos, product mocks.
-
-- **Models available:** `nanoBanana` (fast/cheap), `nanoBanana2` (default), `nanoBananaPro` (hero quality)
-- **Inputs:** prompt + (optional) reference images + aspect ratio + resolution (up to 4K)
-- **Output:** permanent CDN URLs ready to embed anywhere
-- **Try saying:** *"Generate 6 product hero shots for a wireless headphone — 1:1, studio-lit, soft pastel backgrounds."*
-
-### 2️⃣ Generate AI videos
-Text-to-video and image-to-video using state-of-the-art models.
-
-- **Models:** Veo 3, Veo 3 Fast, Sora 2, Kling 3, Kling 2.6, Hailuo 2.3, Seedance Pro/Lite, Wan 2.5, LTX-2
-- **Inputs:** prompt + (optional) start/end-frame images + duration + aspect ratio
-- **Output:** permanent CDN MP4 URLs
-- **Try saying:** *"Make a 6-second product reveal video for these 3 sneakers."*
-
-### 3️⃣ Transform existing images via CDN URL
-Chainable transformations as URL parameters. **No API call. No extra cost.**
-
-- **Always available:** resize, format convert (WebP/JPEG/PNG), compress, blur, sharpen, rotate, extract, extend (padding).
-- **AI ops (require plugin activation in Console, or via the predictions API):** background removal, watermark removal, upscaling, OCR, restoration, colorization.
-- Chain basics: `t.resize(h:2048,w:2048)~t.toFormat(f:webp)~t.compress()`
-- **Try saying:** *"Take this image, resize to 1024×1024, convert to WebP, compress."*
-
-### 4️⃣ Use any of 85+ AI APIs
-Background removal, watermark removal, upscaling, OCR, photo restoration, colorization, expansion, relighting, object removal, frame interpolation, captioning, sketch-to-image, image-to-video, video upscale, video watermark removal — and more.
-
-- **Try saying:** *"Remove watermarks from these 30 photos and upscale them to 4K."*
-
-### 5️⃣ Generate SEO content (with humanization)
-Give me a **target keyword** plus optional references, and I'll generate copy that reads like a real person wrote it (not AI-detector bait):
-
-**Inputs you can pass:**
-- 🎯 `--keyword` — what to rank for *(required)*
-- 🔍 `--research-url` — a competitor or top-ranking page (so I can match search intent)
-- 🎨 `--brand-url` — **your own site** (I extract palette, fonts, container width, voice cues)
-- 📁 `--brand-files` — local CSS / HTML / JSX / MD files (same extraction)
-
-**What I produce:**
-- SEO-optimized title + meta description (with character-count guards)
-- H1, H2/H3 outline tuned for the target keyword
-- Body content in your brand voice — punchy, varied sentence rhythm, no AI tells ("delve into", "in today's fast-paced world", "elevate", em-dash spam)
-- FAQ section with `FAQPage` JSON-LD schema
-- Internal linking suggestions
-- Open Graph + Twitter card metadata
-- **Try saying:** *"Generate humanized SEO content for 'waterproof hiking boots'. My site is yoursite.com — match that brand voice and palette."*
-
-### 6️⃣ Build a complete landing page (with YOUR design system)
-Combine #5 (humanized SEO content) + #1 (AI-generated visuals) into a **ready-to-deploy HTML page that matches your brand**:
-
-1. You give me a **keyword** and a **brand reference** (`--brand-url` or `--brand-files`)
-2. I extract your **design system** — palette, fonts, container width, common spacing
-3. I generate humanized SEO copy targeting your keyword
-4. I generate matching hero + section images via PixelBin (style instructions reference your brand visuals)
-5. I upload images to CDN → permanent URLs
-6. I produce a self-contained `.html` whose CSS variables (`--accent`, `--bg`, `--font-body`, `--container`…) are populated from your design system, with embedded `WebPage` + `FAQPage` JSON-LD
-- **Try saying:** *"Build a landing page for 'AI-generated logos for startups'. My current site is example.com — match that style and visuals."*
+> _Claude reads this file the first time the skill activates. Whatever the user says next, **start by reading this file** and respond in the friendly, chat-first style described here._
 
 ---
 
-## 🚀 The signature demo (try this!)
+## The 30-second path (this is what 90% of people want)
 
-> *"I have 50 product photos. Generate Amazon-, Shopify-, and Instagram-ready versions: white background, 4K, 1:1 for marketplaces, 9:16 for Reels. Output a JSON of CDN URLs."*
+**Step 1 — One-time setup.** Open the file `.env` (next to this skill). Paste two things:
 
-I'll orchestrate **upload → bg-remove → upscale → multi-aspect resize → CDN URLs** in one go.
+```
+PIXELBIN_API_TOKEN=<paste-your-token>
+PIXELBIN_CLOUD_NAME=<your-cloud-name>
+```
+
+Don't have these yet? → [**Get a free PixelBin account**](https://www.pixelbin.io/?utm_source=github&utm_medium=claude-skill&utm_campaign=signup-intro). Token is in *Console → Settings → Tokens*. Cloud name is in *Console → Settings → Organization*.
+
+**Step 2 — Just talk to me.** Tell me what you want, in plain English. No flags, no JSON, no scripts.
+
+Try one of these right now:
+
+> *"Make a hero image of wireless headphones, soft pastel pink background, square."*
+
+> *"Generate 3 lifestyle shots of a leather handbag — woman in a cafe."*
+
+> *"Make a 6-second video of a sneaker rotating on a pedestal."*
+
+> *"Resize this photo to 1080×1080 and convert to WebP."*
+
+**Step 3 — I hand you a CDN URL.** Paste it anywhere — website, ad, deck, Slack, email.
+
+It looks like this:
+
+<p align="center">
+  <img src="https://cdn.pixelbin.io/v2/dummy-cloudname/original/__pixelbin_console_assets/__ai_image_generator/templates/create-a-hero-shot/preview.jpg" width="320" alt="Sample CDN image"/>
+</p>
+
+```
+https://cdn.pixelbin.io/v2/<your-cloud>/original/<folder>/<filename>.png
+```
+
+That URL is permanent, edge-cached, and you can transform it on the fly by changing the URL — no re-upload needed.
 
 ---
 
-## 🗂️ Sample transformations
+## What I can help you do (the broad buckets)
 
-URL-based, no API call needed:
-
-| You want to… | Transform syntax | Type |
+| Bucket | What it means | Try saying… |
 | --- | --- | --- |
-| Resize to 1024×1024 | `t.resize(h:1024,w:1024)` | basic |
-| Convert to WebP | `t.toFormat(f:webp)` | basic |
-| Convert to JPEG | `t.toFormat(f:jpeg)` | basic |
-| Smart compression | `t.compress()` | basic |
-| Blur an image | `t.blur(s:5)` | basic |
-| Sharpen | `t.sharpen(s:5)` | basic |
-| Rotate 90° | `t.rotate(a:90)` | basic |
-| Extract a region | `t.extract(t:0,l:0,h:500,w:500)` | basic |
-| Pad / extend with color | `t.extend(t:20,r:20,b:20,l:20,bc:ffffff)` | basic |
-| Chain transforms | `t.resize(h:1024,w:1024)~t.toFormat(f:webp)~t.compress()` | basic |
-| Remove background | activate the **Erase BG** plugin (`erase_bg`) | AI plugin |
-| Remove watermark | activate the **Watermark Remover** plugin (`wm_remove` / `wmrPro_remove`) | AI plugin |
-| Upscale image | activate the **Upscaler** plugin | AI plugin |
-| OCR / extract text | activate the **OCR** plugin (`ocr_extract`) | AI plugin |
+| 📸 **Image generation** | Make new images from text | *"Generate a hero shot of a wireless speaker on a wooden table."* |
+| ✏️ **Image editing** | Tweak an existing image — change backgrounds, retouch, swap an outfit, add/remove objects | *"Take this product photo and put it on a white background."* |
+| 🔧 **Image transformation** | Resize, crop, format-convert, compress, rotate, blur — all via URL, free, instant | *"Resize this image to 1024×1024 and convert to WebP."* |
+| 🧠 **AI cleanup** | Remove background, remove watermark, upscale to 4K, restore old photos, colorize, OCR | *"Remove the background from these 30 product photos."* |
+| 🎬 **Video generation** | Text-to-video, image-to-video using Sora 2, Veo 3, Kling 3, Hailuo, Seedance, Wan | *"Make a 6-second product reveal video for these sneakers."* |
+| 📦 **Bulk pipelines** | Process many files in one go, ready for marketplaces & social | *"I have 50 product photos. Make Amazon, Shopify, and Instagram versions."* |
+| ✍️ **SEO content** | Humanized titles, meta, body, FAQs that don't sound AI-generated | *"Write SEO content for the keyword 'waterproof hiking boots' in my brand voice — my site is example.com."* |
+| 🌐 **Landing pages** | Generate copy + images + final HTML matching YOUR design system | *"Build a landing page for 'AI image generator for ecommerce'. Match my site at example.com."* |
 
-> Activate plugins at **[console.pixelbin.io](https://console.pixelbin.io) → Plugins**, or call any AI feature via the predictions API (no plugin activation needed) — see [`references/apis.md`](references/apis.md).
-
-Full catalog → [`references/transformations.md`](references/transformations.md)
+I figure out which scripts to run, what models to call, and how to chain them. You just say what you want.
 
 ---
 
-## 💡 Setup check
+## The signature demo (the "wow" moment)
 
-Before we run anything, make sure you have:
+> *"I have 50 product photos. Generate Amazon-, Shopify-, and Instagram-ready versions — white background, 4K, square for marketplaces, 9:16 for Reels. Output a list of CDN URLs."*
 
-- ✅ A PixelBin account → [Sign up free](https://www.pixelbin.io/?utm_source=github&utm_medium=claude-skill&utm_campaign=signup-intro)
-- ✅ `.env` file with `PIXELBIN_API_TOKEN` and `PIXELBIN_CLOUD_NAME` (see [README — Quickstart](README.md#-quickstart-3-steps-2-minutes))
-- ✅ `npm install` already run
-
-If anything is missing, I'll help you set it up first.
+One prompt → I orchestrate upload → background remove → upscale → multi-aspect resize → permanent CDN URLs. You ship.
 
 ---
 
-## 🤔 What would you like to do?
+## Quick examples to spark ideas
 
-Reply with one of:
+**Image generation:**
+> *"Generate 6 product hero shots of a leather watch — varied colors, soft pastel backgrounds, 1:1, 4K."*
 
-- **"Generate images"** — I'll ask for prompts, count, aspect ratios
-- **"Generate a video"** — I'll ask for prompt, model preference, duration
-- **"Transform these images"** — I'll ask for the source URLs and what you want done
-- **"Process this batch"** — bulk pipeline (e.g., the 50-photo demo above)
-- **"Generate SEO content for [keyword]"** — I'll ask for your brand reference (URL or files) and produce humanized copy aligned to your design
-- **"Build a landing page"** — I'll ask for keyword + brand reference (URL or files), extract your design tokens (palette/fonts/container), then generate copy + matching images + final HTML
-- **"Show me what's possible"** — I'll walk through more examples
+**Image editing:**
+> *"Take this photo and replace the background with a minimalist Tokyo cafe interior."*
 
-Or just describe what you're trying to ship and I'll figure out the right tools.
+**Video:**
+> *"Make a cinematic 8-second video of a perfume bottle rotating on a marble pedestal — moody lighting, soft shadows."*
+
+**Quick clean-up:**
+> *"Remove the watermark from these 5 photos and upscale them to 4K."*
+
+**Repurposing one image into many:**
+> *"Take this hero image and give me Instagram square, Reels 9:16, OG 1200×630, and Amazon 2K."*
+
+**Landing page in one prompt:**
+> *"Build a landing page for 'AI-generated headshots for LinkedIn'. My site is yoursite.com — match the style. Include a hero, 4 sections, 6 FAQs."*
+
+---
+
+## How Claude should respond (instructions for the assistant)
+
+When the user says one of the things above, **just do it** — don't ask them to write JSON, pick a model name, or learn CLI flags unless they explicitly ask "how does this work under the hood?". Default behavior:
+
+1. **Confirm setup is OK.** If `.env` is missing or empty, walk them through Step 1. If `node_modules/` isn't there, run `npm install` for them.
+2. **Pick sane defaults silently:**
+   - Image gen → `nanoBanana2_generate`, `aspect_ratio: '1:1'`, `output_resolution: '2K'` unless they specify otherwise.
+   - Video gen → `veo3Fast_generate`, `duration: 6`, `aspect_ratio: '16:9'` unless specified.
+   - Resize/format → `t.resize(...)~t.toFormat(f:webp)~t.compress()`.
+3. **Run the scripts under the hood.** The user shouldn't see `node scripts/...` unless they ask.
+4. **Hand back the URLs**, ideally inline so they can preview, plus a one-line "what next?" suggestion.
+5. **Only surface complexity when needed**: "this transform needs a plugin activated — want me to use the predictions API instead?"
+
+For users who DO want to peek at the machinery → point them at `README.md` (CLI section), `references/apis.md`, `references/transformations.md`, `references/use-cases.md`.
+
+---
+
+## What if I just want to chat about what's possible?
+
+Say *"Show me examples"* or *"What can I do with my product photos?"* and I'll walk you through ideas that match your business. No commitment.
+
+---
+
+## The deeper docs (for the curious)
+
+- `README.md` — install methods, CLI usage, the full pitch
+- `references/apis.md` — every PixelBin AI API by name (image gen, video gen, OCR, upscale, etc.)
+- `references/transformations.md` — every URL transformation you can append
+- `references/use-cases.md` — recipe playbooks
+- `references/cdn.md` — how the CDN + DAM work
+- `SHOWCASE.md` — sample gallery

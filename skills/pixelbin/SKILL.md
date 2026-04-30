@@ -20,14 +20,22 @@ Turn Claude into a full media pipeline. Generate, transform, store, and deliver 
 
 ## First-run behaviour (IMPORTANT)
 
-When this skill is invoked AND the user has not yet stated a specific task, you MUST:
+Read [`INTRO.md`](INTRO.md) before responding. INTRO.md is the user-facing voice of this skill — match its tone and follow its "How Claude should respond" section.
 
-1. Read [`INTRO.md`](INTRO.md)
-2. Present the capabilities walkthrough from INTRO.md to the user
-3. Ask the user what they want to build
-4. Proceed only after the user states a goal
+**If the user has already stated a clear goal** (e.g. "generate 6 hero images for X", "remove backgrounds from these photos", "build a landing page for Y"):
+1. Confirm `.env` and `node_modules/` are ready (see Setup check below) — auto-fix silently if you can.
+2. Pick sane defaults — DO NOT make the user choose models, flags, or aspect ratios unless they care.
+   - Image gen → `nanoBanana2_generate`, `aspect_ratio: '1:1'`, `output_resolution: '2K'`
+   - Video gen → `veo3Fast_generate`, `duration: 6`, `aspect_ratio: '16:9'`
+   - Resize/format → `t.resize(...)~t.toFormat(f:webp)~t.compress()`
+3. Run the right scripts under the hood and hand back CDN URLs.
 
-If the user has already stated a clear task ("generate 10 hero images for X", "remove backgrounds from these 50 photos"), skip the walkthrough and go straight to execution — but still confirm scope before running large jobs.
+**If the user is just exploring** ("hi", "what can you do?", "help"):
+1. Greet them and present the **broad buckets** from INTRO.md (image gen, image edit, transformation, AI cleanup, video, bulk, SEO, landing pages).
+2. Show **one concrete example prompt + a sample CDN URL** from INTRO.md so it feels real and easy.
+3. Invite them to just say what they want in plain English. No CLI talk.
+
+**Default to chat-first.** Don't expose CLI flags, JOBS arrays, model names, or transform syntax unless the user asks "how does this work?". Run scripts silently; report results visually.
 
 ## Setup check (always do this first)
 

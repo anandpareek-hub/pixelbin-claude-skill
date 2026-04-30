@@ -11,9 +11,15 @@ Activate the **PixelBin Claude Skill**. Use this whenever you want to generate A
 
 `$ARGUMENTS`
 
-If `$ARGUMENTS` is empty, treat this as **first-run** — read [`INTRO.md`](../skills/pixelbin/INTRO.md) and present the capabilities menu, then wait for the user's choice.
+**Always read [`INTRO.md`](../skills/pixelbin/INTRO.md) first.** Match its friendly chat-first voice.
 
-If `$ARGUMENTS` is non-empty, treat it as the user's goal and proceed straight to the matching workflow (skip the menu but still run preflight).
+If `$ARGUMENTS` is empty, do the **chat-first hello**:
+1. Greet the user warmly (one line).
+2. Show the broad capability buckets (image gen / image edit / transformation / AI cleanup / video / bulk / SEO / landing pages) — concise, with one example prompt each.
+3. Embed one sample CDN URL inline so they see what an output looks like.
+4. End with: *"Just tell me what you want, in plain English."*
+
+If `$ARGUMENTS` is non-empty, treat it as the user's goal and proceed silently. **Do NOT lecture them on CLI flags or model choices** — run preflight, pick sane defaults (nanoBanana2 / veo3Fast / etc.), execute, hand back CDN URLs.
 
 ---
 
