@@ -140,24 +140,45 @@ You need two things:
 
 ### 3. Use it with Claude
 
-**Option A — Drop into Claude Code as a skill (recommended):**
+There are three ways to invoke this skill from Claude Code, pick whichever fits your workflow.
+
+**Option A — `/pixelbin` slash command (most explicit):**
 
 ```bash
-# Symlink so Claude auto-loads SKILL.md and INTRO.md
+# In any project where you want the slash command:
+mkdir -p .claude/commands
+cp /path/to/pixelbin-claude-skill/.claude/commands/pixelbin.md .claude/commands/
+
+# Or globally for every project:
+mkdir -p ~/.claude/commands
+cp /path/to/pixelbin-claude-skill/.claude/commands/pixelbin.md ~/.claude/commands/
+```
+
+Then in a Claude Code chat:
+```
+/pixelbin                                  # shows the menu
+/pixelbin generate 6 product hero shots    # goes straight to image generation
+/pixelbin build a landing page for X       # kicks off the SEO + page flow
+```
+
+**Option B — Auto-triggered skill (passive):**
+
+```bash
+# Symlink so Claude auto-loads SKILL.md when keywords match
 ln -s "$(pwd)" ~/.claude/skills/pixelbin
 ```
 
-Then start a Claude conversation. On first invocation Claude will read [`INTRO.md`](INTRO.md) and walk you through what's possible.
+Now whenever you say things like *"generate AI images via PixelBin"*, *"build a media pipeline"*, or *"transform these images via CDN"*, the skill activates automatically — no slash command needed.
 
-**Option B — Run the scripts directly:**
+**Option C — Run the scripts directly (no Claude needed):**
 
 ```bash
 node scripts/generate-image.js     # bulk AI image generation
 node scripts/generate-video.js     # bulk AI video generation
 node scripts/upload.js             # upload local files / URLs → permanent CDN URLs
 node scripts/transform.js          # build CDN URLs with transformations
-node scripts/seo-content.js        # generate SEO content for a page
-node scripts/build-page.js         # one-shot: SEO + images → HTML landing page
+node scripts/seo-content.js        # generate SEO + design brief
+node scripts/build-page.js         # assemble HTML page from a spec
 ```
 
 See [`examples/`](examples) for ready-to-run job files.
