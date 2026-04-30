@@ -140,37 +140,46 @@ You need two things:
 
 ### 3. Use it with Claude
 
-There are three ways to invoke this skill from Claude Code, pick whichever fits your workflow.
+Pick the install method that fits your workflow.
 
-**Option A — `/pixelbin` slash command (most explicit):**
+#### Option A — Claude Code plugin (recommended)
+
+Install like you would `superpowers` — via the Claude Code plugin marketplace:
+
+```
+/plugin marketplace add anandpareek-hub/pixelbin-claude-skill
+/plugin install pixelbin@pixelbin-claude-skill
+```
+
+That gives you, immediately:
+- The `/pixelbin` slash command
+- The `pixelbin` skill auto-triggered when you say things like *"generate AI images via PixelBin"*, *"build a media pipeline"*, etc.
+
+To use the local clone you already made instead of GitHub, run:
+
+```
+/plugin marketplace add /absolute/path/to/pixelbin-claude-skill
+/plugin install pixelbin@pixelbin-claude-skill
+```
+
+> ⚠️ The plugin still needs `.env` (`PIXELBIN_API_TOKEN`, `PIXELBIN_CLOUD_NAME`) and `npm install` in the cloned repo so the scripts can run. The plugin handles Claude's side; the scripts are what actually call PixelBin.
+
+#### Option B — Symlink the skill manually
+
+If you don't want the plugin marketplace setup:
 
 ```bash
-# In any project where you want the slash command:
-mkdir -p .claude/commands
-cp /path/to/pixelbin-claude-skill/.claude/commands/pixelbin.md .claude/commands/
+ln -s "$(pwd)/skills/pixelbin" ~/.claude/skills/pixelbin
+```
 
-# Or globally for every project:
+The skill auto-triggers on relevant keywords. Add the slash command too if you want explicit invocation:
+
+```bash
 mkdir -p ~/.claude/commands
-cp /path/to/pixelbin-claude-skill/.claude/commands/pixelbin.md ~/.claude/commands/
+cp commands/pixelbin.md ~/.claude/commands/
 ```
 
-Then in a Claude Code chat:
-```
-/pixelbin                                  # shows the menu
-/pixelbin generate 6 product hero shots    # goes straight to image generation
-/pixelbin build a landing page for X       # kicks off the SEO + page flow
-```
-
-**Option B — Auto-triggered skill (passive):**
-
-```bash
-# Symlink so Claude auto-loads SKILL.md when keywords match
-ln -s "$(pwd)" ~/.claude/skills/pixelbin
-```
-
-Now whenever you say things like *"generate AI images via PixelBin"*, *"build a media pipeline"*, or *"transform these images via CDN"*, the skill activates automatically — no slash command needed.
-
-**Option C — Run the scripts directly (no Claude needed):**
+#### Option C — Run the scripts directly (no Claude needed)
 
 ```bash
 node scripts/generate-image.js     # bulk AI image generation
@@ -182,6 +191,35 @@ node scripts/build-page.js         # assemble HTML page from a spec
 ```
 
 See [`examples/`](examples) for ready-to-run job files.
+
+#### Option D — npm / npx CLI
+
+Once published to npm, the same scripts are available as a single CLI:
+
+```bash
+npx pixelbin-claude-skill help
+npx pixelbin-claude-skill generate-image --jobs ./jobs.json
+npx pixelbin-claude-skill seo --keyword "X" --brand-url https://yoursite.com
+```
+
+Or install globally and use the short `pixelbin` binary:
+
+```bash
+npm install -g pixelbin-claude-skill
+pixelbin generate-image --jobs ./jobs.json
+pixelbin build-page --spec ./page-spec.json --out ./dist/index.html
+```
+
+#### Slash-command usage
+
+After Option A or B (with command copied), you can do:
+
+```
+/pixelbin                                  # shows the menu
+/pixelbin generate 6 product hero shots    # straight to image generation
+/pixelbin build a landing page for X       # SEO + design system + image gen + HTML
+/pixelbin remove watermarks from these     # predictions API flow
+```
 
 ---
 

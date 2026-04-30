@@ -1,0 +1,29 @@
+{
+  "name": "pixelbin",
+  "version": "1.0.0",
+  "description": "Production media pipelines in Claude — 85+ AI APIs, 60+ URL transformations, CDN, DAM. Generate images and videos, transform via URL, build SEO landing pages with your brand's design system.",
+  "author": {
+    "name": "Anand Pareek",
+    "url": "https://github.com/anandpareek-hub"
+  },
+  "homepage": "https://github.com/anandpareek-hub/pixelbin-claude-skill",
+  "repository": "https://github.com/anandpareek-hub/pixelbin-claude-skill",
+  "license": "MIT",
+  "keywords": [
+    "pixelbin",
+    "ai-image-generation",
+    "ai-video-generation",
+    "nano-banana",
+    "image-cdn",
+    "image-transformations",
+    "background-removal",
+    "watermark-removal",
+    "image-upscaling",
+    "dam",
+    "media-pipeline",
+    "ecommerce",
+    "seo",
+    "landing-page",
+    "humanized-content"
+  ]
+}

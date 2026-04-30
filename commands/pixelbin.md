@@ -11,7 +11,7 @@ Activate the **PixelBin Claude Skill**. Use this whenever you want to generate A
 
 `$ARGUMENTS`
 
-If `$ARGUMENTS` is empty, treat this as **first-run** — read [`INTRO.md`](../../INTRO.md) and present the capabilities menu, then wait for the user's choice.
+If `$ARGUMENTS` is empty, treat this as **first-run** — read [`INTRO.md`](../skills/pixelbin/INTRO.md) and present the capabilities menu, then wait for the user's choice.
 
 If `$ARGUMENTS` is non-empty, treat it as the user's goal and proceed straight to the matching workflow (skip the menu but still run preflight).
 
@@ -42,11 +42,11 @@ If any preflight check fails, fix it before generating anything.
 
 Read these files (in this order) to load the skill's behaviour, capabilities, and constraints:
 
-1. [`SKILL.md`](../../SKILL.md) — manifest: when/how to use, SDK patterns, model list, error handling, what NOT to do
-2. [`INTRO.md`](../../INTRO.md) — user-facing menu of capabilities
-3. [`references/apis.md`](../../references/apis.md) — 85+ AI APIs catalog
-4. [`references/transformations.md`](../../references/transformations.md) — URL transformations (basic + AI plugins)
-5. [`references/use-cases.md`](../../references/use-cases.md) — recipe playbooks
+1. [`SKILL.md`](../skills/pixelbin/SKILL.md) — manifest: when/how to use, SDK patterns, model list, error handling, what NOT to do
+2. [`INTRO.md`](../skills/pixelbin/INTRO.md) — user-facing menu of capabilities
+3. [`references/apis.md`](../references/apis.md) — 85+ AI APIs catalog
+4. [`references/transformations.md`](../references/transformations.md) — URL transformations (basic + AI plugins)
+5. [`references/use-cases.md`](../references/use-cases.md) — recipe playbooks
 
 You don't need every file every time — pull what's relevant to `$ARGUMENTS`.
 

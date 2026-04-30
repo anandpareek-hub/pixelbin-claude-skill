@@ -1,0 +1,29 @@
+{
+  "name": "pixelbin-claude-skill",
+  "owner": {
+    "name": "Anand Pareek",
+    "url": "https://github.com/anandpareek-hub"
+  },
+  "metadata": {
+    "description": "Single-plugin marketplace exposing the PixelBin Claude Skill.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "pixelbin",
+      "source": ".",
+      "description": "Production media pipelines in Claude — 85+ AI APIs, 60+ URL transformations, CDN, DAM. Generate images and videos, transform via URL, build SEO landing pages with your brand's design system.",
+      "version": "1.0.0",
+      "category": "media",
+      "tags": [
+        "pixelbin",
+        "ai-image-generation",
+        "ai-video-generation",
+        "image-cdn",
+        "seo",
+        "landing-page"
+      ],
+      "homepage": "https://github.com/anandpareek-hub/pixelbin-claude-skill"
+    }
+  ]
+}
