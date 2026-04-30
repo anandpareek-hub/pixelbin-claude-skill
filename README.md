@@ -1,0 +1,236 @@
+<div align="center">
+
+<a href="https://www.pixelbin.io/?utm_source=github&utm_medium=claude-skill&utm_campaign=logo">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://cdn.pixelbin.io/v2/round-dust-e06b92/t.resize(h:80)/pixelbin-claude-skill-samples/pixelbin-logo-white.png" />
+    <img src="https://cdn.pixelbin.io/v2/round-dust-e06b92/t.resize(h:80)/pixelbin-claude-skill-samples/pixelbin-logo-black.png" alt="Fynd Pixelbin" height="64" />
+  </picture>
+</a>
+
+# PixelBin Claude Skill
+
+**Turn Claude into a full media pipeline — generate, transform, store, and deliver images & videos at scale.**
+
+[![Get API Key](https://img.shields.io/badge/Get_API_Key-Free_Tier-2563eb?style=for-the-badge)](https://www.pixelbin.io/?utm_source=github&utm_medium=claude-skill&utm_campaign=signup)
+[![Pricing](https://img.shields.io/badge/Pricing-View_Plans-10b981?style=for-the-badge)](https://www.pixelbin.io/pricing?utm_source=github&utm_medium=claude-skill&utm_campaign=pricing)
+[![Docs](https://img.shields.io/badge/Docs-PixelBin-6366f1?style=for-the-badge)](https://www.pixelbin.io/docs?utm_source=github&utm_medium=claude-skill&utm_campaign=docs)
+[![License](https://img.shields.io/badge/License-MIT-374151?style=for-the-badge)](LICENSE)
+
+</div>
+
+---
+
+## 🚀 The Wow
+
+> **"Drop 50 product photos in a Claude conversation. Get back e-commerce-ready images — backgrounds removed, upscaled to 4K, watermarked, resized for Amazon, Shopify, and Instagram — in one prompt."**
+
+That's not a roadmap. That's what this skill does, today.
+
+---
+
+## ✨ Created with just one prompt
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="https://cdn.pixelbin.io/v2/round-dust-e06b92/t.resize(h:280,w:280,fit:cover)/pixelbin-claude-skill-samples/product-watch-charcoal.png" width="220" /><br />
+      <sub><b>Watch — studio shot</b></sub>
+    </td>
+    <td align="center">
+      <img src="https://cdn.pixelbin.io/v2/round-dust-e06b92/t.resize(h:280,w:280,fit:cover)/pixelbin-claude-skill-samples/product-handbag-pink.png" width="220" /><br />
+      <sub><b>Handbag on pink</b></sub>
+    </td>
+    <td align="center">
+      <img src="https://cdn.pixelbin.io/v2/round-dust-e06b92/t.resize(h:280,w:280,fit:cover)/pixelbin-claude-skill-samples/product-shoes-sage.png" width="220" /><br />
+      <sub><b>Shoes on sage</b></sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="https://cdn.pixelbin.io/v2/round-dust-e06b92/t.resize(h:280,w:280,fit:cover)/pixelbin-claude-skill-samples/lifestyle-handbag.png" width="220" /><br />
+      <sub><b>Lifestyle — handbag</b></sub>
+    </td>
+    <td align="center">
+      <img src="https://cdn.pixelbin.io/v2/round-dust-e06b92/t.resize(h:280,w:280,fit:cover)/pixelbin-claude-skill-samples/photoshoot-dress-full.png" width="220" /><br />
+      <sub><b>Photoshoot — dress</b></sub>
+    </td>
+    <td align="center">
+      <img src="https://cdn.pixelbin.io/v2/round-dust-e06b92/t.resize(h:280,w:280,fit:cover)/pixelbin-claude-skill-samples/photoshoot-jacket-waistup.png" width="220" /><br />
+      <sub><b>Photoshoot — jacket</b></sub>
+    </td>
+  </tr>
+</table>
+
+🎬 **Video sample (one prompt → ready-to-publish):** [`video-creator-01.mp4`](https://cdn.pixelbin.io/v2/round-dust-e06b92/original/pixelbin-claude-skill-samples/video-creator-01.mp4)
+
+📸 **See the full gallery →** [`SHOWCASE.md`](SHOWCASE.md)
+
+---
+
+## 🆚 How this is different
+
+Most AI-media skills give Claude a single API call. PixelBin gives Claude a **production media stack**.
+
+| Generic AI media skills | **PixelBin Claude Skill** |
+| --- | --- |
+| One-off API calls | **Full media pipeline** — generate → store → transform → deliver |
+| Image gen, OCR, bg-remove… | **85+ AI APIs**: image gen, video gen, OCR, upscale, bg-remove, watermark remove, restore, colorize, expand, relight, frame-interp, video upscale, video watermark remove, +many more |
+| Stateless, no CDN | **Built-in global CDN** — edge cache, HTTP/3, signed URLs, custom domains |
+| Per-call billing | **URL-param transformations** — chain `t.resize().t.bg-remove().t.upscale()` infinitely, free |
+| No bulk pipelines | **Built for batch** — process hundreds in one job, resumable |
+| Just an API | **Includes DAM** — folders, tags, search, access controls, bulk ops |
+
+> 📌 **Powered by the same media infrastructure trusted by enterprise retail brands in production.**
+
+---
+
+## 🧰 What's inside
+
+### 1. **85+ AI APIs** — every media operation you need
+   Image generation (nanoBanana, nanoBanana 2, nanoBanana Pro), video generation (Sora 2, Veo 3, Kling 3, Hailuo, Seedance, LTX-2, Wan 2.5), background removal, watermark removal, image/video upscaling, OCR, photo restoration, colorization, image expansion, relighting, object removal, frame interpolation, captioning, sketch-to-image, image-to-video, and more. → [`references/apis.md`](references/apis.md)
+
+### 2. **60+ URL transformations** — composable, free, instant
+   Resize, crop, format conversion (WebP/AVIF), quality, watermark, blur, sharpen, brightness, saturation, rotation, padding, tinting, smart-crop, focal-point cropping, art presets, and more — all chainable in a single URL. → [`references/transformations.md`](references/transformations.md)
+
+### 3. **Built-in CDN** — global edge delivery
+   Every uploaded asset gets a `cdn.pixelbin.io/v2/...` URL: HTTP/3, edge caching, signed URLs, custom domains. → [`references/cdn.md`](references/cdn.md)
+
+### 4. **DAM (Digital Asset Management)** — your media library, organized
+   Folders, tags, search, access controls (`public-read` / `private`), bulk ops, metadata. Manage thousands of assets without spinning up your own storage layer.
+
+### 5. **Bulk pipelines** — built for scale
+   Concurrency-safe batch runners, resumable jobs, progress checkpointing. Generate 500 images while you sleep. Transform 10,000 product shots in a script.
+
+---
+
+## 📦 What you can build
+
+| Use case | Tools used | Live page |
+| --- | --- | --- |
+| 🛍️ E-commerce hero shots at scale | image-gen + bg-remove + upscale + resize | [AI Image Generator](https://www.pixelbin.io/ai-tools/ai-image-generator?utm_source=github&utm_medium=claude-skill) |
+| 🧹 Bulk watermark cleanup | watermark-remover | [Watermark Remover](https://www.pixelbin.io/ai-tools/remove-watermark?utm_source=github&utm_medium=claude-skill) |
+| 🔍 4K upscaling for print/marketing | image-upscale | [AI Image Upscaler](https://www.pixelbin.io/ai-tools/ai-image-upscaler?utm_source=github&utm_medium=claude-skill) |
+| ✂️ One-click background removal | bg-remove | [Remove Background](https://www.pixelbin.io/ai-tools/remove-background-from-image?utm_source=github&utm_medium=claude-skill) |
+| 🎬 AI video generation (text/image → video) | video-gen (Veo 3 / Sora 2 / Kling 3) | [AI Video Generator](https://www.pixelbin.io/ai-tools/ai-video-generator?utm_source=github&utm_medium=claude-skill) |
+| 🎨 AI image editing (inpaint, expand, relight) | nanoBanana 2 / Pro | [AI Photo Editor](https://www.pixelbin.io/ai-tools/ai-photo-editor?utm_source=github&utm_medium=claude-skill) |
+| 🌈 Old photo restoration & colorization | restore + colorize | [Photo Restoration](https://www.pixelbin.io/ai-tools/photo-restoration?utm_source=github&utm_medium=claude-skill) |
+| 📄 Landing-page generation (SEO + images) | seo-content + image-gen + build-page | — |
+
+---
+
+## ⚡ Quickstart (3 steps, ~2 minutes)
+
+### 1. Install
+
+```bash
+git clone https://github.com/anandpareek-hub/pixelbin-claude-skill.git
+cd pixelbin-claude-skill
+npm install
+```
+
+### 2. Configure
+
+```bash
+cp .env.example .env
+# Open .env and fill in your token + cloud name
+```
+
+You need two things:
+
+| Var | Where to find it |
+| --- | --- |
+| `PIXELBIN_API_TOKEN` | [console.pixelbin.io](https://console.pixelbin.io) → **Settings → Tokens → API Token** (Owner / Admin only) |
+| `PIXELBIN_CLOUD_NAME` | [console.pixelbin.io](https://console.pixelbin.io) → **Settings → Organization** (immutable slug, e.g. `round-dust-e06b92`) |
+
+🆓 **Don't have an account?** → [Sign up free](https://www.pixelbin.io/?utm_source=github&utm_medium=claude-skill&utm_campaign=signup)
+
+### 3. Use it with Claude
+
+**Option A — Drop into Claude Code as a skill (recommended):**
+
+```bash
+# Symlink so Claude auto-loads SKILL.md and INTRO.md
+ln -s "$(pwd)" ~/.claude/skills/pixelbin
+```
+
+Then start a Claude conversation. On first invocation Claude will read [`INTRO.md`](INTRO.md) and walk you through what's possible.
+
+**Option B — Run the scripts directly:**
+
+```bash
+node scripts/generate-image.js     # bulk AI image generation
+node scripts/generate-video.js     # bulk AI video generation
+node scripts/upload.js             # upload local files / URLs → permanent CDN URLs
+node scripts/transform.js          # build CDN URLs with transformations
+node scripts/seo-content.js        # generate SEO content for a page
+node scripts/build-page.js         # one-shot: SEO + images → HTML landing page
+```
+
+See [`examples/`](examples) for ready-to-run job files.
+
+---
+
+## 🎯 The killer demo — bulk e-commerce in one prompt
+
+Open Claude with this skill loaded and try:
+
+> *"I have 12 product photos in `./products/`. Generate Amazon-, Shopify-, and Instagram-ready versions for each: white background, 4K upscale, square crop for marketplaces, 9:16 for Instagram Reels. Output a JSON of CDN URLs."*
+
+The skill orchestrates: upload → bg-remove → upscale → multi-aspect resize → CDN URL build. One prompt. Production-ready URLs out.
+
+See [`examples/bulk-ecom.example.js`](examples/bulk-ecom.example.js).
+
+---
+
+## 💸 Pricing & free tier
+
+PixelBin offers a **free tier with monthly credits** — enough to experiment and ship a small project.
+
+For production volume, paid plans start at low monthly fees with bulk credit packs. → **[View pricing](https://www.pixelbin.io/pricing?utm_source=github&utm_medium=claude-skill&utm_campaign=pricing)**
+
+When Claude hits an `Insufficient credits` error, it will surface the upgrade link automatically.
+
+---
+
+## 📚 Reference docs
+
+- [`SKILL.md`](SKILL.md) — Claude-facing skill manifest (how Claude uses this)
+- [`INTRO.md`](INTRO.md) — First-run user walkthrough Claude reads
+- [`SHOWCASE.md`](SHOWCASE.md) — Full sample gallery (17 images + 4 videos)
+- [`references/apis.md`](references/apis.md) — All 85+ AI APIs catalog
+- [`references/transformations.md`](references/transformations.md) — All 60+ URL transformations
+- [`references/cdn.md`](references/cdn.md) — How the CDN + DAM work
+- [`references/use-cases.md`](references/use-cases.md) — Recipe playbooks
+
+Official PixelBin docs → [pixelbin.io/docs](https://www.pixelbin.io/docs?utm_source=github&utm_medium=claude-skill&utm_campaign=docs)
+
+---
+
+## 🤝 Contributing
+
+PRs welcome. Found a transformation we don't cover? A use case worth a recipe? Open an issue.
+
+## 📄 License
+
+MIT — see [LICENSE](LICENSE).
+
+---
+
+<div align="center">
+  <sub>Built with ❤️ by developers who got tired of stitching 5 APIs to ship one product page.</sub><br />
+  <sub><a href="https://www.pixelbin.io/?utm_source=github&utm_medium=claude-skill&utm_campaign=footer">pixelbin.io</a> · <a href="https://www.pixelbin.io/pricing?utm_source=github&utm_medium=claude-skill&utm_campaign=footer">pricing</a> · <a href="https://www.pixelbin.io/docs?utm_source=github&utm_medium=claude-skill&utm_campaign=footer">docs</a></sub>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "PixelBin Claude Skill",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Cross-platform",
+  "description": "Claude Code skill that turns Claude into a full media pipeline using PixelBin's 85+ AI APIs, 60+ URL transformations, built-in CDN, and DAM.",
+  "url": "https://github.com/anandpareek-hub/pixelbin-claude-skill",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "creator": { "@type": "Organization", "name": "PixelBin", "url": "https://www.pixelbin.io" }
+}
+</script>

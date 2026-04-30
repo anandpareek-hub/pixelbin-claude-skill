@@ -1,0 +1,20 @@
+[
+  {
+    "key": "headphones-hero",
+    "prompt": "sleek wireless over-ear headphones product hero shot, studio lit, soft pastel pink gradient backdrop, e-commerce magazine quality",
+    "aspect_ratio": "1:1",
+    "output_resolution": "2K"
+  },
+  {
+    "key": "sneaker-side-angle",
+    "prompt": "minimalist white sneaker, side angle, floating on light beige seamless backdrop, soft contact shadow, premium e-commerce hero",
+    "aspect_ratio": "4:5",
+    "output_resolution": "2K"
+  },
+  {
+    "key": "watch-flat-lay",
+    "prompt": "luxury analog wristwatch with stainless-steel case and black leather strap, flat lay, charcoal seamless backdrop, soft top-key lighting, dial visible",
+    "aspect_ratio": "1:1",
+    "output_resolution": "2K"
+  }
+]

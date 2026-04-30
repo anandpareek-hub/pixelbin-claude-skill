@@ -1,0 +1,46 @@
+{
+  "name": "pixelbin-claude-skill",
+  "version": "1.0.0",
+  "description": "Claude skill for production media pipelines — 85+ AI APIs, 60+ URL transformations, CDN, DAM. Drop product photos in chat, get e-commerce-ready output.",
+  "private": true,
+  "scripts": {
+    "generate:image": "node scripts/generate-image.js",
+    "generate:video": "node scripts/generate-video.js",
+    "upload": "node scripts/upload.js",
+    "transform": "node scripts/transform.js",
+    "seo": "node scripts/seo-content.js",
+    "build-page": "node scripts/build-page.js"
+  },
+  "dependencies": {
+    "@pixelbin/admin": "^1.0.0",
+    "dotenv": "^16.4.5"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "claude",
+    "claude-code",
+    "claude-skill",
+    "pixelbin",
+    "ai-image-generation",
+    "ai-video-generation",
+    "nano-banana",
+    "image-cdn",
+    "image-transformations",
+    "background-removal",
+    "watermark-removal",
+    "image-upscaling",
+    "dam",
+    "media-pipeline",
+    "ecommerce",
+    "seo",
+    "landing-page"
+  ],
+  "homepage": "https://github.com/anandpareek-hub/pixelbin-claude-skill",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anandpareek-hub/pixelbin-claude-skill.git"
+  },
+  "license": "MIT"
+}

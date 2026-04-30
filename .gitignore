@@ -1,0 +1,30 @@
+# env / secrets
+.env
+.env.local
+.env.*.local
+
+# node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+package-lock.json
+
+# generated outputs
+scripts/image-urls.json
+scripts/video-urls.json
+scripts/cdn-image-urls.json
+scripts/cdn-video-urls.json
+scripts/output-*.html
+scripts/output-*.json
+output/
+generated/
+
+# os
+.DS_Store
+Thumbs.db
+
+# ide
+.vscode/
+.idea/
+*.swp
+*.swo
