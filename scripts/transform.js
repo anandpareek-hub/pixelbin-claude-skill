@@ -28,19 +28,29 @@ let JOBS = [
     {
         key: 'hero-instagram-square',
         source: 'claude-skill/hero.png',
-        transforms: ['t.bg-remove()', 't.smartcrop(h:1080,w:1080)', 't.f.auto()', 't.q(v:85)'],
+        transforms: ['t.resize(h:1080,w:1080)', 't.toFormat(f:webp)', 't.compress()'],
     },
     {
         key: 'hero-reel-9x16',
         source: 'claude-skill/hero.png',
-        transforms: ['t.smartcrop(h:1920,w:1080)', 't.f.auto()'],
+        transforms: ['t.resize(h:1920,w:1080)', 't.toFormat(f:webp)'],
     },
     {
         key: 'hero-amazon-2k',
         source: 'claude-skill/hero.png',
-        transforms: ['t.bg-remove()', 't.resize(h:2000,w:2000,fit:cover)', 't.upscale(type:2x)'],
+        transforms: ['t.resize(h:2000,w:2000)', 't.toFormat(f:jpeg)', 't.compress()'],
+    },
+    {
+        key: 'og-1200x630',
+        source: 'claude-skill/hero.png',
+        transforms: ['t.resize(h:630,w:1200)', 't.toFormat(f:jpeg)', 't.compress()'],
     },
 ];
+
+// Note: For AI ops (background removal, upscaling, watermark removal),
+// either activate the matching plugin in console.pixelbin.io → Plugins,
+// or call pixelbin.predictions.createAndWait({ name: '<api>', input: {...} })
+// — see references/apis.md.
 
 const jobsArg = process.argv.indexOf('--jobs');
 if (jobsArg !== -1 && process.argv[jobsArg + 1]) {

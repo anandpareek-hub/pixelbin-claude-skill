@@ -51,45 +51,39 @@ Common input: `{ prompt, images?, aspect_ratio?, duration? }`
 
 ---
 
-## Image transformations / cleanup
+## Image plugins (cleanup / enhancement)
 
-These are also available as URL transformations (no API call) — see [`transformations.md`](transformations.md). Use the API endpoints when you need explicit control or the result as an asset.
+Each plugin can be activated in [console.pixelbin.io → Plugins](https://console.pixelbin.io) for inline URL use, OR called directly via `pixelbin.predictions.createAndWait({ name: '<id>', input: { image: <cdn_url> } })`.
 
-| API name | What it does |
+| Identifier | What it does |
 | --- | --- |
-| `bg-remove` | Remove background |
-| `wmr-watermark-remove` | Remove watermark from image |
-| `vsr-upscale` | Image super-resolution / upscaling |
-| `eraseBg-eve` | Auto-enhance & background cleanup |
-| `obj-remove` | Object removal |
-| `ai-relight` | Studio-grade relighting |
-| `restore` | Old photo restoration |
-| `colorize` | Colorize black-and-white photos |
-| `expand` | Generative expand / outpaint |
-| `frame-interp` | Frame interpolation |
-
-> Names follow the pattern observed in PixelBin's docs at the time of writing. Always verify with the live docs at pixelbin.io/docs.
+| `erase_bg` | Remove background |
+| `generate_bg` | AI-generate a backdrop |
+| `wm_remove` | Watermark removal |
+| `wmrPro_remove` | Pro-quality watermark removal |
+| `wmrMax_remove` | Max-quality watermark removal |
+| `wmc_detect` | Watermark detection |
+| `af_remove` | Compression artifact removal |
+| `dbt_detect` | Backdrop quality classification |
+| `ocr_extract` | Extract text from images |
+| `pr_tag` | AI product tagging |
 
 ---
 
-## Video tools
+## Video plugins
 
-| API name | What it does |
+| Identifier | What it does |
 | --- | --- |
 | `vsr_upscale` | Video upscaling |
 | `wmv_remove` | Video watermark removal |
 
 ---
 
-## Other media intelligence
+## PDF plugins
 
-| API name | What it does |
+| Identifier | What it does |
 | --- | --- |
-| `ocr` | Extract text from images |
-| `caption` | Image captioning |
-| `sketch-to-image` | Sketch → photorealistic image |
-| `image-to-video` | Animate a still image |
-| `style-transfer` | Apply a style reference to a target |
+| `pwr_remove` | PDF watermark removal |
 
 ---
 
@@ -99,10 +93,11 @@ PixelBin's catalog continues to expand. The 85+ figure cited in the README count
 
 - Image generation models (3 nanoBanana variants)
 - Video generation models (16+: Veo / Sora / Kling / Hailuo / Seedance / Wan / LTX-2 variants)
-- Image cleanup / enhancement APIs (bg-remove, wm-remove, upscale, restore, colorize, expand, relight, obj-remove, frame-interp, etc.)
-- Video cleanup / enhancement APIs (vsr_upscale, wmv_remove)
-- Media intelligence (OCR, captioning, sketch, image-to-video, style transfer)
-- Plus 60+ URL transformations available without an API call
+- Image cleanup / enhancement plugins (erase_bg, wm_remove, wmrPro/wmrMax, af_remove, etc.)
+- Video plugins (vsr_upscale, wmv_remove)
+- PDF plugins (pwr_remove)
+- Media intelligence (ocr_extract, pr_tag, dbt_detect, wmc_detect)
+- Plus the catalog of URL transformations available without an API call
 
 For the live, authoritative list, always check **[pixelbin.io/docs](https://www.pixelbin.io/docs?utm_source=github&utm_medium=claude-skill)**.
 

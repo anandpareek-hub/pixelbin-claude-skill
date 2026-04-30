@@ -1,13 +1,13 @@
 # PixelBin URL transformations
 
-URL transformations let you modify any image **without an API call** — just append the transform spec to the URL. They are free, instant (rendered + cached at the edge), and chainable.
+URL transformations modify any image **without an API call** — just append the transform spec to the URL. They are free, instant (rendered + cached at the edge), and chainable.
 
 ## URL anatomy
 
 ```
 https://cdn.pixelbin.io/v2/<CLOUD>/<TRANSFORMS>/<PATH>/<FILE>.<EXT>
 
-  TRANSFORMS:  one or more `t.preset(args)` joined by `~`
+  TRANSFORMS:  one or more `t.<name>(args)` joined by `~`
                or `original` for no transform
 ```
 
@@ -17,112 +17,91 @@ https://cdn.pixelbin.io/v2/<CLOUD>/<TRANSFORMS>/<PATH>/<FILE>.<EXT>
 # Original
 https://cdn.pixelbin.io/v2/round-dust-e06b92/original/claude-skill/hero.png
 
-# Resize to 1024×1024 (cover)
-https://cdn.pixelbin.io/v2/round-dust-e06b92/t.resize(h:1024,w:1024,fit:cover)/claude-skill/hero.png
+# Resize to 1024×1024
+https://cdn.pixelbin.io/v2/round-dust-e06b92/t.resize(h:1024,w:1024)/claude-skill/hero.png
 
-# bg-remove → upscale → WebP
-https://cdn.pixelbin.io/v2/round-dust-e06b92/t.bg-remove()~t.upscale(type:2x)~t.f.webp()/claude-skill/hero.png
+# Resize → WebP (chained with ~)
+https://cdn.pixelbin.io/v2/round-dust-e06b92/t.resize(h:1024,w:1024)~t.toFormat(f:webp)/claude-skill/hero.png
 ```
 
-## Categories
+---
 
-### Sizing & crop
+## Basic transforms (work out-of-the-box, no setup)
+
+These transforms are part of every PixelBin cloud and don't require any plugin activation.
+
+### Sizing & geometry
 
 | Transform | Purpose | Example |
 | --- | --- | --- |
-| `t.resize(h:H,w:W,fit:F)` | Resize | `t.resize(h:1024,w:1024,fit:cover)` |
-| `t.smartcrop(h:H,w:W)` | Focal-point smart crop | `t.smartcrop(h:1080,w:1080)` |
-| `t.pad(h:H,w:W,c:color)` | Pad to ratio | `t.pad(h:1920,w:1080,c:white)` |
-| `t.extract(x:X,y:Y,h:H,w:W)` | Extract region | — |
-
-`fit` values: `cover`, `contain`, `fill`, `inside`, `outside`.
+| `t.resize(h:H,w:W)` | Resize to dimensions | `t.resize(h:1024,w:1024)` |
+| `t.extract(t:T,l:L,h:H,w:W)` | Extract a region (top, left, height, width) | `t.extract(t:0,l:0,h:500,w:500)` |
+| `t.extend(t:T,r:R,b:B,l:L,bc:HEX)` | Pad / extend edges with a color | `t.extend(t:20,r:20,b:20,l:20,bc:ffffff)` |
+| `t.rotate(a:DEG)` | Rotate by degrees | `t.rotate(a:90)` |
 
 ### Format & quality
 
-| Transform | Purpose |
-| --- | --- |
-| `t.f.auto()` | Auto-pick best format (WebP/AVIF/JPG) per browser |
-| `t.f.webp()` / `t.f.avif()` / `t.f.jpg()` / `t.f.png()` | Force a format |
-| `t.q(v:N)` | Quality 1–100 |
-| `t.f.lossless()` | Lossless variant of the format |
-
-### AI cleanup (most popular)
-
-| Transform | Purpose |
-| --- | --- |
-| `t.bg-remove()` | Remove background |
-| `t.wmr-watermark-remove()` | Remove watermark |
-| `t.upscale(type:2x)` / `t.upscale(type:4x)` | Upscale |
-| `t.eraseBg.eve()` | Auto enhance + bg cleanup |
-| `t.restore()` | Photo restore |
-| `t.colorize()` | Colorize B&W |
-| `t.expand(h:H,w:W)` | Generative expand |
-
-### Color & light
-
-| Transform | Purpose |
-| --- | --- |
-| `t.brightness(v:N)` | Brightness ±100 |
-| `t.contrast(v:N)` | Contrast ±100 |
-| `t.saturation(v:N)` | Saturation ±100 |
-| `t.tint(c:color,a:alpha)` | Tint overlay |
-| `t.grayscale()` | Convert to grayscale |
-| `t.sepia(v:N)` | Sepia tone |
-| `t.invert()` | Invert colors |
+| Transform | Purpose | Example |
+| --- | --- | --- |
+| `t.toFormat(f:FMT)` | Convert format | `t.toFormat(f:webp)` / `t.toFormat(f:jpeg)` / `t.toFormat(f:png)` |
+| `t.compress()` | Smart compression | `t.compress()` |
 
 ### Effects
 
-| Transform | Purpose |
-| --- | --- |
-| `t.blur(s:N)` | Gaussian blur |
-| `t.sharpen(s:N)` | Sharpen |
-| `t.pixelate(s:N)` | Pixelate |
-| `t.noise(s:N)` | Add noise |
-| `t.vignette()` | Vignette |
+| Transform | Purpose | Example |
+| --- | --- | --- |
+| `t.blur(s:N)` | Gaussian blur | `t.blur(s:5)` |
+| `t.sharpen(s:N)` | Sharpen | `t.sharpen(s:5)` |
 
-### Geometry
+---
 
-| Transform | Purpose |
-| --- | --- |
-| `t.rotate(a:deg)` | Rotate by degrees |
-| `t.flip(d:h\|v)` | Flip horizontal / vertical |
-| `t.rt.round(r:N)` | Round corners (radius) |
-| `t.rt.circle()` | Circle crop |
+## AI plugins (require activation per cloud)
 
-### Composition / branding
+PixelBin's AI features are exposed as **plugins** — once enabled in the Console, each plugin gets a transformation identifier you can use in URLs. Until activated, calling them via URL returns 400.
 
-| Transform | Purpose |
-| --- | --- |
-| `t.merge(m:overlay,i:logo,p:bottom-right)` | Add a logo / watermark overlay |
-| `t.merge(m:underlay,i:bg)` | Underlay another asset |
-| `t.text(t:"hello",c:#fff,s:48,p:center)` | Render text on the image |
+You can also invoke any of these via the **predictions API** (`pixelbin.predictions.createAndWait`) — see [`apis.md`](apis.md). The predictions API works without per-cloud plugin activation.
 
-### Document / PDF (where available)
+| Plugin | Identifier | What it does |
+| --- | --- | --- |
+| Erase Background | `erase_bg` | Remove background |
+| Generate Background | `generate_bg` | AI-generate a backdrop |
+| Watermark Remover | `wm_remove` | Remove watermark |
+| Watermark Remover Pro | `wmrPro_remove` | Pro-quality watermark removal |
+| Watermark Remover Max | `wmrMax_remove` | Max-quality watermark removal |
+| Watermark Detection | `wmc_detect` | Detect if watermarked |
+| Artifact Remover | `af_remove` | Remove compression artifacts |
+| Detect Background | `dbt_detect` | Classify backdrop quality |
+| OCR | `ocr_extract` | Extract text |
+| Product Tagging | `pr_tag` | AI tags |
+| Video Upscaler | `vsr_upscale` | Upscale videos |
+| Video Watermark Remover | `wmv_remove` | Remove video watermarks |
+| PDF Watermark Remover | `pwr_remove` | Remove watermarks from PDFs |
 
-| Transform | Purpose |
-| --- | --- |
-| `t.pdf.toImage(p:1)` | Render PDF page → image |
-| `t.pdf.split(p:1-3)` | Split PDF pages |
+> Activate plugins in **[console.pixelbin.io](https://console.pixelbin.io) → Plugins**. Configuration & syntax for each plugin lives in your console (some require credentials).
+
+For the always-available, non-plugin path to AI features, use the predictions API → see [`apis.md`](apis.md).
 
 ---
 
 ## Chaining
 
-Join transforms with `~`. Order matters — the leftmost transform runs first.
+Join transforms with `~`. The leftmost transform runs first.
 
 ```
-# Background remove first, then resize, then to WebP
-t.bg-remove()~t.resize(h:1024,w:1024,fit:cover)~t.f.webp()
+# Resize, then convert to WebP, then compress
+t.resize(h:1024,w:1024)~t.toFormat(f:webp)~t.compress()
 ```
-
-## Tips
-
-- Use `t.f.auto()` for production — cuts bandwidth 30–60% with no work.
-- Cache-bust with `?v=2` if you replace the underlying asset.
-- Combine `t.bg-remove()` with `t.merge(m:underlay,...)` to drop a product onto any backdrop.
-- Use `t.smartcrop(...)` (not `resize`) when subject framing matters — it uses saliency detection.
-- For Open Graph images, `t.smartcrop(h:630,w:1200)~t.f.jpg()~t.q(v:80)` is a good default.
 
 ---
 
-> The 60+ transforms above are the most-used ones. PixelBin ships additional presets (art filters, physics-based effects, document utilities). Always defer to **[pixelbin.io/docs](https://www.pixelbin.io/docs?utm_source=github&utm_medium=claude-skill)** for the live catalog.
+## Tips
+
+- For OG / Twitter cards: `t.resize(h:630,w:1200)~t.toFormat(f:jpeg)~t.compress()` is a solid default.
+- Use `t.toFormat(f:webp)` for marketing pages — smaller payloads, broad browser support.
+- For thumbnails: `t.resize(h:280,w:280)~t.compress()` is fast + cache-friendly.
+- Pad to a target ratio without cropping: `t.extend(t:20,r:0,b:20,l:0,bc:ffffff)` (or compute padding from your source size).
+- Cache-bust with `?v=2` (or any querystring change) if you replace the underlying asset.
+
+---
+
+> Always defer to **[pixelbin.io/docs](https://www.pixelbin.io/docs?utm_source=github&utm_medium=claude-skill)** for the live catalog and any new transforms or plugins.

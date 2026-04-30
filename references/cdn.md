@@ -39,7 +39,7 @@ https://cdn.pixelbin.io/v2/<CLOUD>/<TRANSFORMS>/<PATH>/<FILE>.<EXT>
 
 - **Global CDN** — edge PoPs across regions; first request renders, rest serve from cache.
 - **HTTP/3 + Brotli** — modern transport, small payloads.
-- **Auto-format** (`t.f.auto()`) — serve AVIF / WebP based on `Accept` header.
+- **Auto-format** (`t.toFormat(f:webp)`) — serve AVIF / WebP based on `Accept` header.
 - **Signed URLs** — for private assets, generate time-limited URLs via the SDK.
 - **Custom domain** — point `cdn.yourbrand.com` at PixelBin (paid plans).
 
@@ -69,8 +69,8 @@ Both return the asset record (path, format, width, height, …), which you use t
 
 ## Performance defaults to bake in
 
-- Always serve via `t.f.auto()` for browser delivery — saves 30–60% bandwidth.
-- Use `t.q(v:80)` for marketing-grade quality. Drop to 70 for thumbnails.
+- Always serve via `t.toFormat(f:webp)` for browser delivery — saves 30–60% bandwidth.
+- Use `t.compress()` for marketing-grade quality. Drop to 70 for thumbnails.
 - For LCP elements, set `loading="eager"` and `fetchpriority="high"` in HTML.
 - For long pages, lazy-load: `loading="lazy"`.
 

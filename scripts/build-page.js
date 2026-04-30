@@ -81,11 +81,11 @@ function pageJsonLd() {
     };
 }
 
-const heroImg = img(spec.sections?.[0]?.image_key, { transform: 't.resize(h:800,w:1600,fit:cover)~t.f.auto()' });
+const heroImg = img(spec.sections?.[0]?.image_key, { transform: 't.resize(h:800,w:1600)~t.toFormat(f:webp)' });
 
 const sectionsHtml = (spec.sections || []).map((s, i) => `
     <section class="block">
-      ${s.image_key ? `<img class="block-img" loading="lazy" src="${esc(img(s.image_key, { transform: 't.resize(h:600,w:1200,fit:cover)~t.f.auto()' }))}" alt="${esc(s.h2)}" />` : ''}
+      ${s.image_key ? `<img class="block-img" loading="lazy" src="${esc(img(s.image_key, { transform: 't.resize(h:600,w:1200)~t.toFormat(f:webp)' }))}" alt="${esc(s.h2)}" />` : ''}
       <h2>${esc(s.h2)}</h2>
       <div class="prose">${s.body}</div>
     </section>

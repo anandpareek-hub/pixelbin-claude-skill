@@ -1,140 +1,98 @@
 # 📸 PixelBin Claude Skill — Sample Gallery
 
-Every image and video below was created with **just one prompt** through the PixelBin Claude Skill.
+A small selection of what's possible with **just one prompt** through the PixelBin Claude Skill. All images served from PixelBin's global CDN.
 
-All assets are served from PixelBin's global CDN. The URLs are real, public, and permanent — feel free to copy any of them and use them as references.
-
-> **🎯 The point of this gallery:** show what's achievable from a single prompt + this skill, end-to-end, with no manual editing.
+> Want any of these for your own brand? Clone the repo, set up `.env`, and use the prompts in `examples/jobs.example.json` as a starting point.
 
 ---
 
-## 🎨 Category 1 — Product on color backgrounds
-
-E-commerce hero shots. Single prompt → centered subject, seamless backdrop, soft contact shadow, 4K commercial quality.
+## 🎨 Image templates (one prompt each)
 
 <table>
 <tr>
 <td align="center" width="33%">
-  <img src="https://cdn.pixelbin.io/v2/round-dust-e06b92/t.resize(h:400,w:400,fit:cover)/pixelbin-claude-skill-samples/product-watch-charcoal.png" width="320"/><br/>
-  <sub><b>Watch on charcoal</b><br/>1:1 · studio · soft top-key</sub>
+  <img src="https://cdn.pixelbin.io/v2/dummy-cloudname/original/__pixelbin_console_assets/__ai_image_generator/templates/create-a-hero-shot/preview.jpg" width="280"/><br/>
+  <sub><b>Hero shot</b></sub>
 </td>
 <td align="center" width="33%">
-  <img src="https://cdn.pixelbin.io/v2/round-dust-e06b92/t.resize(h:400,w:400,fit:cover)/pixelbin-claude-skill-samples/product-handbag-beige.png" width="320"/><br/>
-  <sub><b>Handbag on beige</b></sub>
+  <img src="https://cdn.pixelbin.io/v2/dummy-cloudname/original/__pixelbin_console_assets/__ai_image_generator/templates/floating-product-photo/preview.jpg" width="280"/><br/>
+  <sub><b>Floating product photo</b></sub>
 </td>
 <td align="center" width="33%">
-  <img src="https://cdn.pixelbin.io/v2/round-dust-e06b92/t.resize(h:400,w:400,fit:cover)/pixelbin-claude-skill-samples/product-shoes-white.png" width="320"/><br/>
-  <sub><b>Shoes on white</b></sub>
+  <img src="https://cdn.pixelbin.io/v2/dummy-cloudname/original/__pixelbin_console_assets/__ai_image_generator/templates/editorial-fashion-photo/preview.jpg" width="280"/><br/>
+  <sub><b>Editorial fashion</b></sub>
 </td>
 </tr>
 <tr>
 <td align="center">
-  <img src="https://cdn.pixelbin.io/v2/round-dust-e06b92/t.resize(h:400,w:400,fit:cover)/pixelbin-claude-skill-samples/product-sunglasses-black.png" width="320"/><br/>
-  <sub><b>Sunglasses on black</b></sub>
+  <img src="https://cdn.pixelbin.io/v2/dummy-cloudname/original/__pixelbin_console_assets/__ai_image_generator/templates/product-in-lifestyle-scene/preview.jpg" width="280"/><br/>
+  <sub><b>Product in lifestyle scene</b></sub>
 </td>
 <td align="center">
-  <img src="https://cdn.pixelbin.io/v2/round-dust-e06b92/t.resize(h:400,w:400,fit:cover)/pixelbin-claude-skill-samples/product-handbag-pink.png" width="320"/><br/>
-  <sub><b>Handbag on pink</b></sub>
+  <img src="https://cdn.pixelbin.io/v2/dummy-cloudname/original/__pixelbin_console_assets/__ai_image_generator/templates/cinematic-frame/preview.jpg" width="280"/><br/>
+  <sub><b>Cinematic frame</b></sub>
 </td>
 <td align="center">
-  <img src="https://cdn.pixelbin.io/v2/round-dust-e06b92/t.resize(h:400,w:400,fit:cover)/pixelbin-claude-skill-samples/product-shoes-sage.png" width="320"/><br/>
-  <sub><b>Shoes on sage</b></sub>
+  <img src="https://cdn.pixelbin.io/v2/dummy-cloudname/original/__pixelbin_console_assets/__ai_image_generator/templates/generate-a-tech-product-photo/preview.jpg" width="280"/><br/>
+  <sub><b>Tech product photo</b></sub>
+</td>
+</tr>
+<tr>
+<td align="center">
+  <img src="https://cdn.pixelbin.io/v2/dummy-cloudname/original/__pixelbin_console_assets/__ai_image_generator/templates/create-your-influencer/preview.jpg" width="280"/><br/>
+  <sub><b>Create your influencer</b></sub>
+</td>
+<td align="center">
+  <img src="https://cdn.pixelbin.io/v2/dummy-cloudname/original/__pixelbin_console_assets/__ai_image_generator/templates/try-on-outfits/preview.jpg" width="280"/><br/>
+  <sub><b>Try-on outfits</b></sub>
+</td>
+<td align="center">
+  <img src="https://cdn.pixelbin.io/v2/dummy-cloudname/original/__pixelbin_console_assets/__ai_image_generator/templates/replace-your-product/preview.jpg" width="280"/><br/>
+  <sub><b>Replace your product</b></sub>
+</td>
+</tr>
+<tr>
+<td align="center">
+  <img src="https://cdn.pixelbin.io/v2/dummy-cloudname/original/__pixelbin_console_assets/__ai_image_generator/templates/branding-mockup/preview.jpg" width="280"/><br/>
+  <sub><b>Branding mockup</b></sub>
+</td>
+<td align="center">
+  <img src="https://cdn.pixelbin.io/v2/dummy-cloudname/original/__pixelbin_console_assets/__ai_image_generator/templates/analog-style-photos/preview.jpg" width="280"/><br/>
+  <sub><b>Analog style</b></sub>
+</td>
+<td align="center">
+  <img src="https://cdn.pixelbin.io/v2/dummy-cloudname/original/__pixelbin_console_assets/__ai_image_generator/templates/sports-action-photo/preview.jpg" width="280"/><br/>
+  <sub><b>Sports action</b></sub>
+</td>
+</tr>
+<tr>
+<td align="center">
+  <img src="https://cdn.pixelbin.io/v2/dummy-cloudname/original/__pixelbin_console_assets/__ai_image_generator/templates/typographic-poster/preview.jpg" width="280"/><br/>
+  <sub><b>Typographic poster</b></sub>
+</td>
+<td align="center">
+  <img src="https://cdn.pixelbin.io/v2/dummy-cloudname/original/__pixelbin_console_assets/__ai_image_generator/templates/object-into-3d-illustration/preview.jpg" width="280"/><br/>
+  <sub><b>Object → 3D illustration</b></sub>
+</td>
+<td align="center">
+  <img src="https://cdn.pixelbin.io/v2/dummy-cloudname/original/__pixelbin_console_assets/__ai_image_generator/templates/documentary-style-image/preview.jpg" width="280"/><br/>
+  <sub><b>Documentary style</b></sub>
 </td>
 </tr>
 </table>
 
 ---
 
-## 🌿 Category 2 — Lifestyle photography
+## 🛠️ URL transformations on the same images
 
-Editorial-grade lifestyle shots. Single prompt → person + product, natural lighting, depth of field.
+Every image above is served from PixelBin's CDN — meaning you can append URL transforms and the edge will render them on the fly. Try modifying any URL with:
 
-<table>
-<tr>
-<td align="center" width="33%">
-  <img src="https://cdn.pixelbin.io/v2/round-dust-e06b92/t.resize(h:400,w:400,fit:cover)/pixelbin-claude-skill-samples/lifestyle-handbag.png" width="320"/><br/>
-  <sub><b>Cafe stroll — handbag</b></sub>
-</td>
-<td align="center" width="33%">
-  <img src="https://cdn.pixelbin.io/v2/round-dust-e06b92/t.resize(h:400,w:400,fit:cover)/pixelbin-claude-skill-samples/lifestyle-jacket.png" width="320"/><br/>
-  <sub><b>Outdoor jacket</b></sub>
-</td>
-<td align="center" width="33%">
-  <img src="https://cdn.pixelbin.io/v2/round-dust-e06b92/t.resize(h:400,w:400,fit:cover)/pixelbin-claude-skill-samples/lifestyle-dress.png" width="320"/><br/>
-  <sub><b>Editorial dress</b></sub>
-</td>
-</tr>
-<tr>
-<td align="center">
-  <img src="https://cdn.pixelbin.io/v2/round-dust-e06b92/t.resize(h:400,w:400,fit:cover)/pixelbin-claude-skill-samples/lifestyle-shoes.png" width="320"/><br/>
-  <sub><b>Walking shoes</b></sub>
-</td>
-<td align="center">
-  <img src="https://cdn.pixelbin.io/v2/round-dust-e06b92/t.resize(h:400,w:400,fit:cover)/pixelbin-claude-skill-samples/lifestyle-sunglasses.png" width="320"/><br/>
-  <sub><b>Sunglasses lifestyle</b></sub>
-</td>
-<td align="center">
-  <img src="https://cdn.pixelbin.io/v2/round-dust-e06b92/t.resize(h:400,w:400,fit:cover)/pixelbin-claude-skill-samples/lifestyle-watch.png" width="320"/><br/>
-  <sub><b>Wristwatch lifestyle</b></sub>
-</td>
-</tr>
-</table>
-
----
-
-## 📷 Category 3 — Studio photoshoot
-
-Full-body and waist-up studio shots. Single prompt → consistent subject, controlled lighting, magazine-quality.
-
-<table>
-<tr>
-<td align="center" width="33%">
-  <img src="https://cdn.pixelbin.io/v2/round-dust-e06b92/t.resize(h:400,w:400,fit:cover)/pixelbin-claude-skill-samples/photoshoot-dress-full.png" width="320"/><br/>
-  <sub><b>Dress — full body</b></sub>
-</td>
-<td align="center" width="33%">
-  <img src="https://cdn.pixelbin.io/v2/round-dust-e06b92/t.resize(h:400,w:400,fit:cover)/pixelbin-claude-skill-samples/photoshoot-jacket-waistup.png" width="320"/><br/>
-  <sub><b>Jacket — waist up</b></sub>
-</td>
-<td align="center" width="33%">
-  <img src="https://cdn.pixelbin.io/v2/round-dust-e06b92/t.resize(h:400,w:400,fit:cover)/pixelbin-claude-skill-samples/photoshoot-handbag-full.png" width="320"/><br/>
-  <sub><b>Handbag — full body</b></sub>
-</td>
-</tr>
-<tr>
-<td align="center">
-  <img src="https://cdn.pixelbin.io/v2/round-dust-e06b92/t.resize(h:400,w:400,fit:cover)/pixelbin-claude-skill-samples/photoshoot-jacket-full.png" width="320"/><br/>
-  <sub><b>Jacket — full body</b></sub>
-</td>
-<td align="center">
-  <img src="https://cdn.pixelbin.io/v2/round-dust-e06b92/t.resize(h:400,w:400,fit:cover)/pixelbin-claude-skill-samples/photoshoot-kurta-full.png" width="320"/><br/>
-  <sub><b>Kurta set — full</b></sub>
-</td>
-<td></td>
-</tr>
-</table>
-
----
-
-## 🎬 Video samples — one prompt → ready-to-publish
-
-| # | Sample | Direct URL |
-| --- | --- | --- |
-| 1 | Creator-style short video #01 | [`video-creator-01.mp4`](https://cdn.pixelbin.io/v2/round-dust-e06b92/original/pixelbin-claude-skill-samples/video-creator-01.mp4) |
-| 2 | Creator-style short video #05 | [`video-creator-05.mp4`](https://cdn.pixelbin.io/v2/round-dust-e06b92/original/pixelbin-claude-skill-samples/video-creator-05.mp4) |
-| 3 | Creator-style short video #10 | [`video-creator-10.mp4`](https://cdn.pixelbin.io/v2/round-dust-e06b92/original/pixelbin-claude-skill-samples/video-creator-10.mp4) |
-| 4 | Creator-style short video #15 | [`video-creator-15.mp4`](https://cdn.pixelbin.io/v2/round-dust-e06b92/original/pixelbin-claude-skill-samples/video-creator-15.mp4) |
-
----
-
-## 🛠️ Want to see the URL transformations in action?
-
-Each image above is **served via `t.resize(h:400,w:400,fit:cover)`** — that's a transformation, free, no API call. Try modifying any URL:
-
-- Add `~t.bg-remove()` → background gone
-- Swap `t.resize(...)` for `t.smartcrop(h:1080,w:1080)` → smart focal-point crop
-- Add `~t.f.webp()` → WebP delivery
-- Add `~t.upscale(type:2x)` → 2× upscale on the fly
+- `~t.resize(h:280,w:280)` → resize to 280×280
+- `~t.toFormat(f:webp)` → convert to WebP
+- `~t.compress()` → smaller file size
+- `~t.blur(s:5)` → soft blur
+- `~t.rotate(a:90)` → rotate 90°
+- For AI ops (background removal, upscaling, watermark removal), enable the matching plugin in your Console — or call the predictions API via the skill's scripts.
 
 That's the PixelBin pipeline in one sentence: **upload once, transform infinitely via URL, serve via CDN.**
 

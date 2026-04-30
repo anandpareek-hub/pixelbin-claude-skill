@@ -25,11 +25,12 @@ Text-to-video and image-to-video using state-of-the-art models.
 - **Try saying:** *"Make a 6-second product reveal video for these 3 sneakers."*
 
 ### 3️⃣ Transform existing images via CDN URL
-60+ chainable transformations as URL parameters. **No API call. No extra cost.**
+Chainable transformations as URL parameters. **No API call. No extra cost.**
 
-- Resize, crop, smart-crop, format convert (WebP/AVIF), quality, watermark, blur, sharpen, brightness, saturation, rotation, padding, tinting, art presets…
-- Chain transforms: `t.bg-remove()~t.resize(h:2048,w:2048)~t.upscale(type:2x)`
-- **Try saying:** *"Take this image and remove the background, upscale to 4K, and resize for Instagram square."*
+- **Always available:** resize, format convert (WebP/JPEG/PNG), compress, blur, sharpen, rotate, extract, extend (padding).
+- **AI ops (require plugin activation in Console, or via the predictions API):** background removal, watermark removal, upscaling, OCR, restoration, colorization.
+- Chain basics: `t.resize(h:2048,w:2048)~t.toFormat(f:webp)~t.compress()`
+- **Try saying:** *"Take this image, resize to 1024×1024, convert to WebP, compress."*
 
 ### 4️⃣ Use any of 85+ AI APIs
 Background removal, watermark removal, upscaling, OCR, photo restoration, colorization, expansion, relighting, object removal, frame interpolation, captioning, sketch-to-image, image-to-video, video upscale, video watermark removal — and more.
@@ -67,24 +68,28 @@ I'll orchestrate **upload → bg-remove → upscale → multi-aspect resize → 
 
 ---
 
-## 🗂️ Sample transformations (top 12)
+## 🗂️ Sample transformations
 
-These are URL-based, no API call needed:
+URL-based, no API call needed:
 
-| You want to… | Transform syntax |
-| --- | --- |
-| Resize to 1024×1024 (cover crop) | `t.resize(h:1024,w:1024,fit:cover)` |
-| Convert to WebP (auto-best-format) | `t.f.auto()` |
-| Compress to 80% quality | `t.q(v:80)` |
-| Remove background | `t.bg-remove()` |
-| Remove watermark | `t.wmr-watermark-remove()` |
-| Upscale 2× / 4× | `t.upscale(type:2x)` / `t.upscale(type:4x)` |
-| Smart-crop to a focal subject | `t.smartcrop(h:1080,w:1080)` |
-| Add a logo watermark overlay | `t.merge(m:overlay,i:logo,p:bottom-right)` |
-| Blur faces / regions | `t.blur(s:50)` |
-| Auto-enhance colors | `t.eraseBg.eve()` |
-| Pad to a target ratio | `t.pad(h:1920,w:1080,c:white)` |
-| Round corners for cards | `t.rt.round(r:24)` |
+| You want to… | Transform syntax | Type |
+| --- | --- | --- |
+| Resize to 1024×1024 | `t.resize(h:1024,w:1024)` | basic |
+| Convert to WebP | `t.toFormat(f:webp)` | basic |
+| Convert to JPEG | `t.toFormat(f:jpeg)` | basic |
+| Smart compression | `t.compress()` | basic |
+| Blur an image | `t.blur(s:5)` | basic |
+| Sharpen | `t.sharpen(s:5)` | basic |
+| Rotate 90° | `t.rotate(a:90)` | basic |
+| Extract a region | `t.extract(t:0,l:0,h:500,w:500)` | basic |
+| Pad / extend with color | `t.extend(t:20,r:20,b:20,l:20,bc:ffffff)` | basic |
+| Chain transforms | `t.resize(h:1024,w:1024)~t.toFormat(f:webp)~t.compress()` | basic |
+| Remove background | activate the **Erase BG** plugin (`erase_bg`) | AI plugin |
+| Remove watermark | activate the **Watermark Remover** plugin (`wm_remove` / `wmrPro_remove`) | AI plugin |
+| Upscale image | activate the **Upscaler** plugin | AI plugin |
+| OCR / extract text | activate the **OCR** plugin (`ocr_extract`) | AI plugin |
+
+> Activate plugins at **[console.pixelbin.io](https://console.pixelbin.io) → Plugins**, or call any AI feature via the predictions API (no plugin activation needed) — see [`references/apis.md`](references/apis.md).
 
 Full catalog → [`references/transformations.md`](references/transformations.md)
 

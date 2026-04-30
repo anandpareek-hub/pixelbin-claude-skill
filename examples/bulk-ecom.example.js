@@ -37,11 +37,14 @@ function slug(s) {
     return s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 }
 
+// URL-only variants (basic transforms — work on every cloud, no plugin needed).
+// For background removal, upscaling, etc., either activate the matching plugin
+// in console.pixelbin.io → Plugins, or call the predictions API and re-upload.
 const VARIANTS = {
-    marketplace_2k: 't.bg-remove()~t.resize(h:2000,w:2000,fit:cover)~t.upscale(type:2x)~t.f.auto()~t.q(v:85)',
-    instagram_square: 't.bg-remove()~t.smartcrop(h:1080,w:1080)~t.f.auto()~t.q(v:85)',
-    reels_9x16: 't.bg-remove()~t.smartcrop(h:1920,w:1080)~t.f.auto()~t.q(v:85)',
-    og_1200x630: 't.bg-remove()~t.smartcrop(h:630,w:1200)~t.f.jpg()~t.q(v:80)',
+    marketplace_2k: 't.resize(h:2000,w:2000)~t.toFormat(f:webp)~t.compress()',
+    instagram_square: 't.resize(h:1080,w:1080)~t.toFormat(f:webp)~t.compress()',
+    reels_9x16: 't.resize(h:1920,w:1080)~t.toFormat(f:webp)~t.compress()',
+    og_1200x630: 't.resize(h:630,w:1200)~t.toFormat(f:jpeg)~t.compress()',
 };
 
 async function processOne(filePath) {

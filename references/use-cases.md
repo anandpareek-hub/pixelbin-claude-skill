@@ -2,31 +2,39 @@
 
 End-to-end workflows you can run from a single Claude prompt with this skill loaded.
 
+> **About AI ops:** background removal, upscaling, watermark removal, restoration, colorization etc. require either (a) the matching **plugin** activated at [console.pixelbin.io → Plugins](https://console.pixelbin.io), or (b) the **predictions API** (`pixelbin.predictions.createAndWait`) — which always works without per-cloud activation. The recipes below show both paths.
+
 ---
 
 ## 1. Bulk e-commerce — make 50 photos marketplace-ready
 
 **You say:**
-> *"I have 50 product photos in `./products/`. Generate Amazon-, Shopify-, and Instagram-ready versions: white background, 4K upscale, square (1:1) for marketplaces, 9:16 for Reels. Output a JSON of CDN URLs."*
+> *"I have 50 product photos in `./products/`. Generate Amazon-, Shopify-, and Instagram-ready versions: white background, square (1:1) for marketplaces, 9:16 for Reels. Output a JSON of CDN URLs."*
 
 **What happens:**
-1. `scripts/upload.js --files "./products/*.jpg"` — uploads all originals.
-2. For each uploaded asset, generate the variants by URL (no API call):
-   - `t.bg-remove()~t.resize(h:2000,w:2000,fit:cover)~t.upscale(type:2x)~t.f.auto()` → marketplace
-   - `t.bg-remove()~t.smartcrop(h:1920,w:1080)~t.f.auto()` → Reels
-3. Output JSON: `{ <product-key>: { marketplace_url, reels_url } }`
+1. `node scripts/upload.js --files "./products/*.jpg"` — uploads all originals.
+2. For each uploaded asset, build URL variants:
+   - `t.resize(h:2000,w:2000)~t.toFormat(f:webp)~t.compress()` → marketplace
+   - `t.resize(h:1080,w:1080)~t.toFormat(f:webp)~t.compress()` → Instagram
+   - `t.resize(h:1920,w:1080)~t.toFormat(f:webp)~t.compress()` → Reels
+3. For background removal, either: activate **Erase BG** plugin and prepend `~p:erase_bg.bg()` (per console config), OR call `pixelbin.predictions.createAndWait({ name: 'erase_bg', input: { image: cdnUrl } })` and re-upload the result.
+4. Output JSON: `{ <product-key>: { marketplace_url, instagram_url, reels_url } }`
+
+See [`examples/bulk-ecom.example.js`](../examples/bulk-ecom.example.js).
 
 ---
 
 ## 2. Watermark cleanup at scale
 
 **You say:**
-> *"Remove watermarks from these 30 product photos and upscale 2×."*
+> *"Remove watermarks from these 30 product photos."*
 
 **What happens:**
 1. Upload originals via `upload.js --files`.
-2. For each, build URL `t.wmr-watermark-remove()~t.upscale(type:2x)~t.f.auto()`.
-3. (Optional) Re-upload the cleaned variants as new assets via `urlUpload`.
+2. For each, call `pixelbin.predictions.createAndWait({ name: 'wm_remove', input: { image: cdnUrl } })`.
+3. Upload the cleaned outputs back to PixelBin via `urlUpload` for permanent CDN URLs.
+
+(If you've activated the Watermark Remover plugin in your Console, you can also call it inline as a URL transform — check your console for the exact syntax.)
 
 ---
 
@@ -84,19 +92,20 @@ End-to-end workflows you can run from a single Claude prompt with this skill loa
 
 **What happens:**
 1. Upload originals.
-2. URL transform: `t.restore()~t.colorize()~t.f.auto()`.
-3. (Optional) Re-upload cleaned variants.
+2. For each: `pixelbin.predictions.createAndWait({ name: 'restore', input: { image: cdnUrl } })` then `pixelbin.predictions.createAndWait({ name: 'colorize', input: { image: <restored_url> } })`.
+3. Re-upload the final outputs for permanent CDN URLs.
 
 ---
 
-## 8. Convert a folder of PDFs to OG images
+## 8. Convert a folder of PDFs to OG images (1200×630)
 
 **You say:**
-> *"For each PDF in ./reports/, render page 1 as a 1200×630 Open Graph image."*
+> *"For each PDF in ./reports/, render page 1 as an Open Graph image."*
 
 **What happens:**
 1. Upload PDFs via `upload.js --files`.
-2. URL transform: `t.pdf.toImage(p:1)~t.smartcrop(h:630,w:1200)~t.q(v:80)~t.f.jpg()`.
+2. For each, the canonical OG transform on a rendered image: `t.resize(h:630,w:1200)~t.toFormat(f:jpeg)~t.compress()`.
+3. (PDF-to-image rendering is provided by the PDF Watermark / PDF tooling plugins — activate the relevant plugin or use the predictions API for `pdf2image`-style flows.)
 
 ---
 

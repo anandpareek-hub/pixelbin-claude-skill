@@ -57,7 +57,7 @@ Two URL patterns:
 
 - **Original (no transform):** `https://cdn.pixelbin.io/v2/<CLOUD>/original/<path>/<file>.<ext>`
 - **Transformed:** `https://cdn.pixelbin.io/v2/<CLOUD>/<t.preset(args)>/<path>/<file>.<ext>`
-  - Multiple transforms chained with `~`: `t.bg-remove()~t.resize(h:1024,w:1024)~t.upscale(type:2x)`
+  - Multiple transforms chained with `~`: `t.resize(h:1024,w:1024)~t.toFormat(f:webp)~t.compress()`
 
 ## Capabilities (high-level)
 
@@ -113,7 +113,7 @@ const up2 = await pixelbin.assets.urlUpload({
 });
 
 // 4. TRANSFORM (no API call — just build the URL)
-const cdn = `https://cdn.pixelbin.io/v2/${CLOUD}/t.bg-remove()~t.resize(h:2048,w:2048)/my-folder/hero.png`;
+const cdn = `https://cdn.pixelbin.io/v2/${CLOUD}/t.resize(h:2048,w:2048)~t.toFormat(f:webp)~t.compress()/my-folder/hero.png`;
 ```
 
 ## Models reference
@@ -140,20 +140,23 @@ const cdn = `https://cdn.pixelbin.io/v2/${CLOUD}/t.bg-remove()~t.resize(h:2048,w
 
 Full list: [`references/apis.md`](references/apis.md).
 
-## Common URL transformations (most used)
+## Common URL transformations
+
+Basic transforms (always available — no plugin needed):
 
 | Transform | Syntax | Example |
 | --- | --- | --- |
-| Resize | `t.resize(h:H,w:W,fit:F)` | `t.resize(h:1024,w:1024,fit:cover)` |
-| Background remove | `t.bg-remove()` | — |
-| Watermark remove | `t.wmr-watermark-remove()` | — |
-| Upscale | `t.upscale(type:2x)` | `t.upscale(type:4x)` |
-| Format convert | `t.f.auto()` or `t.f.webp()` | — |
-| Quality | `t.q(v:80)` | — |
-| Smart crop | `t.smartcrop(h:1080,w:1080)` | — |
-| Watermark add | `t.merge(m:overlay,i:logo)` | — |
+| Resize | `t.resize(h:H,w:W)` | `t.resize(h:1024,w:1024)` |
+| Format convert | `t.toFormat(f:FMT)` | `t.toFormat(f:webp)` / `t.toFormat(f:jpeg)` / `t.toFormat(f:png)` |
+| Compress | `t.compress()` | — |
+| Blur / sharpen | `t.blur(s:N)` / `t.sharpen(s:N)` | `t.blur(s:5)` |
+| Rotate | `t.rotate(a:DEG)` | `t.rotate(a:90)` |
+| Extract region | `t.extract(t:T,l:L,h:H,w:W)` | `t.extract(t:0,l:0,h:500,w:500)` |
+| Extend / pad | `t.extend(t:T,r:R,b:B,l:L,bc:HEX)` | `t.extend(t:20,r:20,b:20,l:20,bc:ffffff)` |
 
-Chain with `~`. Full catalog: [`references/transformations.md`](references/transformations.md).
+AI ops via plugins (require activation in **console.pixelbin.io → Plugins**) — identifiers: `erase_bg`, `wm_remove`, `wmrPro_remove`, `wmrMax_remove`, `af_remove`, `ocr_extract`, `pr_tag`, `vsr_upscale`, `wmv_remove`, `pwr_remove`. For features the user hasn't activated, fall back to the **predictions API** (`pixelbin.predictions.createAndWait`) — that always works.
+
+Chain transforms with `~`. Full catalog: [`references/transformations.md`](references/transformations.md).
 
 ## Error handling
 

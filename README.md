@@ -32,38 +32,30 @@ That's not a roadmap. That's what this skill does, today.
 
 <table>
   <tr>
-    <td align="center">
-      <img src="https://cdn.pixelbin.io/v2/round-dust-e06b92/t.resize(h:280,w:280,fit:cover)/pixelbin-claude-skill-samples/product-watch-charcoal.png" width="220" /><br />
-      <sub><b>Watch — studio shot</b></sub>
+    <td align="center" width="20%">
+      <img src="https://cdn.pixelbin.io/v2/dummy-cloudname/original/__pixelbin_console_assets/__ai_image_generator/templates/create-a-hero-shot/preview.jpg" width="200" /><br />
+      <sub><b>Hero shot</b></sub>
     </td>
-    <td align="center">
-      <img src="https://cdn.pixelbin.io/v2/round-dust-e06b92/t.resize(h:280,w:280,fit:cover)/pixelbin-claude-skill-samples/product-handbag-pink.png" width="220" /><br />
-      <sub><b>Handbag on pink</b></sub>
+    <td align="center" width="20%">
+      <img src="https://cdn.pixelbin.io/v2/dummy-cloudname/original/__pixelbin_console_assets/__ai_image_generator/templates/floating-product-photo/preview.jpg" width="200" /><br />
+      <sub><b>Floating product</b></sub>
     </td>
-    <td align="center">
-      <img src="https://cdn.pixelbin.io/v2/round-dust-e06b92/t.resize(h:280,w:280,fit:cover)/pixelbin-claude-skill-samples/product-shoes-sage.png" width="220" /><br />
-      <sub><b>Shoes on sage</b></sub>
+    <td align="center" width="20%">
+      <img src="https://cdn.pixelbin.io/v2/dummy-cloudname/original/__pixelbin_console_assets/__ai_image_generator/templates/editorial-fashion-photo/preview.jpg" width="200" /><br />
+      <sub><b>Editorial fashion</b></sub>
     </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <img src="https://cdn.pixelbin.io/v2/round-dust-e06b92/t.resize(h:280,w:280,fit:cover)/pixelbin-claude-skill-samples/lifestyle-handbag.png" width="220" /><br />
-      <sub><b>Lifestyle — handbag</b></sub>
+    <td align="center" width="20%">
+      <img src="https://cdn.pixelbin.io/v2/dummy-cloudname/original/__pixelbin_console_assets/__ai_image_generator/templates/product-in-lifestyle-scene/preview.jpg" width="200" /><br />
+      <sub><b>Lifestyle scene</b></sub>
     </td>
-    <td align="center">
-      <img src="https://cdn.pixelbin.io/v2/round-dust-e06b92/t.resize(h:280,w:280,fit:cover)/pixelbin-claude-skill-samples/photoshoot-dress-full.png" width="220" /><br />
-      <sub><b>Photoshoot — dress</b></sub>
-    </td>
-    <td align="center">
-      <img src="https://cdn.pixelbin.io/v2/round-dust-e06b92/t.resize(h:280,w:280,fit:cover)/pixelbin-claude-skill-samples/photoshoot-jacket-waistup.png" width="220" /><br />
-      <sub><b>Photoshoot — jacket</b></sub>
+    <td align="center" width="20%">
+      <img src="https://cdn.pixelbin.io/v2/dummy-cloudname/original/__pixelbin_console_assets/__ai_image_generator/templates/cinematic-frame/preview.jpg" width="200" /><br />
+      <sub><b>Cinematic frame</b></sub>
     </td>
   </tr>
 </table>
 
-🎬 **Video sample (one prompt → ready-to-publish):** [`video-creator-01.mp4`](https://cdn.pixelbin.io/v2/round-dust-e06b92/original/pixelbin-claude-skill-samples/video-creator-01.mp4)
-
-📸 **See the full gallery →** [`SHOWCASE.md`](SHOWCASE.md)
+📸 **See more →** [`SHOWCASE.md`](SHOWCASE.md)
 
 ---
 
@@ -76,7 +68,7 @@ Most AI-media skills give Claude a single API call. PixelBin gives Claude a **pr
 | One-off API calls | **Full media pipeline** — generate → store → transform → deliver |
 | Image gen, OCR, bg-remove… | **85+ AI APIs**: image gen, video gen, OCR, upscale, bg-remove, watermark remove, restore, colorize, expand, relight, frame-interp, video upscale, video watermark remove, +many more |
 | Stateless, no CDN | **Built-in global CDN** — edge cache, HTTP/3, signed URLs, custom domains |
-| Per-call billing | **URL-param transformations** — chain `t.resize().t.bg-remove().t.upscale()` infinitely, free |
+| Per-call billing | **URL-param transformations** — chain `t.resize()~t.toFormat(f:webp)~t.compress()` infinitely, free |
 | No bulk pipelines | **Built for batch** — process hundreds in one job, resumable |
 | Just an API | **Includes DAM** — folders, tags, search, access controls, bulk ops |
 
