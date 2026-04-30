@@ -12,8 +12,13 @@
     "build-page": "node scripts/build-page.js"
   },
   "dependencies": {
-    "@pixelbin/admin": "^1.0.0",
+    "@pixelbin/admin": "^4.2.0",
     "dotenv": "^16.4.5"
+  },
+  "overrides": {
+    "axios": "^1.12.0",
+    "crypto-js": "^4.2.0",
+    "form-data": "^4.0.4"
   },
   "engines": {
     "node": ">=18"

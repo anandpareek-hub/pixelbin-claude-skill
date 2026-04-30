@@ -120,6 +120,8 @@ cd pixelbin-claude-skill
 npm install
 ```
 
+> Make sure you `cd` into the folder `git clone` actually creates (`pixelbin-claude-skill`). The repo includes `overrides` in `package.json` to keep all transitive dependencies (axios, crypto-js, form-data) on patched versions, so a clean install reports **0 vulnerabilities**.
+
 ### 2. Configure
 
 ```bash
