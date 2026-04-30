@@ -19,11 +19,20 @@
  *     "h1": "...",
  *     "intro": "<paragraph>",
  *     "sections": [
- *       { "h2": "...", "body": "<paragraphs>", "image_key": "section-1-image" },
- *       ...
+ *       { "h2": "...", "body": "<paragraphs>", "image_key": "section-1-image" }
  *     ],
- *     "faqs": [{ "q": "...", "a": "..." }, ...],
- *     "image_urls": { "<key>": "https://cdn.pixelbin.io/v2/.../...png", ... },
+ *     "faqs": [{ "q": "...", "a": "..." }],
+ *     "image_urls": { "<key>": "https://cdn.pixelbin.io/v2/.../...png" },
+ *     "design": {                      // OPTIONAL — derived from brief.design_system
+ *       "fg":   "#0a0a0a",             //   text color
+ *       "bg":   "#ffffff",             //   background
+ *       "muted":"#666666",
+ *       "accent":"#6d28d9",            //   primary brand color
+ *       "line": "#eeeeee",
+ *       "container":   "760px",        //   page max-width
+ *       "font_body":   "Inter, sans-serif",
+ *       "font_heading":"Inter Tight, sans-serif"
+ *     },
  *     "schema": { ... optional pre-built JSON-LD ... }
  *   }
  */
@@ -112,10 +121,20 @@ const html = `<!doctype html>
 ${heroImg ? `<meta property="og:image" content="${esc(heroImg)}" />` : ''}
 <meta name="twitter:card" content="summary_large_image" />
 <style>
-:root { --fg:#0a0a0a; --muted:#666; --bg:#fff; --accent:#6d28d9; --line:#eee; }
+:root {
+  --fg: ${esc(spec.design?.fg || '#0a0a0a')};
+  --muted: ${esc(spec.design?.muted || '#666666')};
+  --bg: ${esc(spec.design?.bg || '#ffffff')};
+  --accent: ${esc(spec.design?.accent || '#6d28d9')};
+  --line: ${esc(spec.design?.line || '#eeeeee')};
+  --container: ${esc(spec.design?.container || '760px')};
+  --font-body: ${esc(spec.design?.font_body || '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif')};
+  --font-heading: ${esc(spec.design?.font_heading || 'inherit')};
+}
 * { box-sizing: border-box; }
-body { margin:0; font:16px/1.6 -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif; color:var(--fg); background:var(--bg); }
-.wrap { max-width: 760px; margin: 0 auto; padding: 48px 20px; }
+body { margin:0; font:16px/1.6 var(--font-body); color:var(--fg); background:var(--bg); }
+h1, h2, h3 { font-family: var(--font-heading); }
+.wrap { max-width: var(--container); margin: 0 auto; padding: 48px 20px; }
 .hero { margin-bottom: 32px; }
 .hero img { width:100%; height:auto; border-radius:12px; }
 h1 { font-size: 2.25rem; line-height:1.2; margin: 0.5em 0; }

@@ -37,26 +37,34 @@ Background removal, watermark removal, upscaling, OCR, photo restoration, colori
 
 - **Try saying:** *"Remove watermarks from these 30 photos and upscale them to 4K."*
 
-### 5️⃣ Generate SEO content from your URL or code
-Give me a **page URL** or **paste your HTML/JSX/Markdown** and I'll generate **humanized** content that reads like a real person wrote it (not AI-detector bait):
+### 5️⃣ Generate SEO content (with humanization)
+Give me a **target keyword** plus optional references, and I'll generate copy that reads like a real person wrote it (not AI-detector bait):
 
-- SEO-optimized titles + meta descriptions (with character-count guards)
+**Inputs you can pass:**
+- 🎯 `--keyword` — what to rank for *(required)*
+- 🔍 `--research-url` — a competitor or top-ranking page (so I can match search intent)
+- 🎨 `--brand-url` — **your own site** (I extract palette, fonts, container width, voice cues)
+- 📁 `--brand-files` — local CSS / HTML / JSX / MD files (same extraction)
+
+**What I produce:**
+- SEO-optimized title + meta description (with character-count guards)
 - H1, H2/H3 outline tuned for the target keyword
 - Body content in your brand voice — punchy, varied sentence rhythm, no AI tells ("delve into", "in today's fast-paced world", "elevate", em-dash spam)
 - FAQ section with `FAQPage` JSON-LD schema
 - Internal linking suggestions
 - Open Graph + Twitter card metadata
-- **Try saying:** *"Here's my page URL — rewrite it for the keyword 'waterproof hiking boots' in a friendly outdoor brand voice."* — or — *"Here's my JSX file, generate humanized SEO content + visuals for it."*
+- **Try saying:** *"Generate humanized SEO content for 'waterproof hiking boots'. My site is yoursite.com — match that brand voice and palette."*
 
-### 6️⃣ Build a complete landing page
-Combine #5 (humanized SEO content) + #1 (AI-generated visuals) into a **ready-to-deploy HTML or JSX page**:
+### 6️⃣ Build a complete landing page (with YOUR design system)
+Combine #5 (humanized SEO content) + #1 (AI-generated visuals) into a **ready-to-deploy HTML page that matches your brand**:
 
-- I read your URL or your existing code as the brand/style reference
-- I generate humanized SEO copy targeting your keyword
-- I generate matching hero + section images via PixelBin
-- I upload images to CDN → permanent URLs
-- I produce a self-contained `.html` (or framework component) with embedded JSON-LD schema
-- **Try saying:** *"Build a landing page for 'AI-generated logos for startups'. My current site is example.com — match that style."*
+1. You give me a **keyword** and a **brand reference** (`--brand-url` or `--brand-files`)
+2. I extract your **design system** — palette, fonts, container width, common spacing
+3. I generate humanized SEO copy targeting your keyword
+4. I generate matching hero + section images via PixelBin (style instructions reference your brand visuals)
+5. I upload images to CDN → permanent URLs
+6. I produce a self-contained `.html` whose CSS variables (`--accent`, `--bg`, `--font-body`, `--container`…) are populated from your design system, with embedded `WebPage` + `FAQPage` JSON-LD
+- **Try saying:** *"Build a landing page for 'AI-generated logos for startups'. My current site is example.com — match that style and visuals."*
 
 ---
 
@@ -115,8 +123,8 @@ Reply with one of:
 - **"Generate a video"** — I'll ask for prompt, model preference, duration
 - **"Transform these images"** — I'll ask for the source URLs and what you want done
 - **"Process this batch"** — bulk pipeline (e.g., the 50-photo demo above)
-- **"Generate SEO content for [URL or code]"** — I'll fetch / parse, ask for keyword, produce humanized copy
-- **"Build a landing page"** — I'll ask for keyword + brand reference (URL or code), then generate copy + images + final HTML
+- **"Generate SEO content for [keyword]"** — I'll ask for your brand reference (URL or files) and produce humanized copy aligned to your design
+- **"Build a landing page"** — I'll ask for keyword + brand reference (URL or files), extract your design tokens (palette/fonts/container), then generate copy + matching images + final HTML
 - **"Show me what's possible"** — I'll walk through more examples
 
 Or just describe what you're trying to ship and I'll figure out the right tools.

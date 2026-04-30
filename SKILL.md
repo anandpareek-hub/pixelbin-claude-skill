@@ -67,8 +67,21 @@ Two URL patterns:
 | AI video generation | `scripts/generate-video.js` | [apis.md#video-generation](references/apis.md#video-generation) |
 | Upload local file / URL → CDN | `scripts/upload.js` | [cdn.md](references/cdn.md) |
 | Build transformation URLs | `scripts/transform.js` | [transformations.md](references/transformations.md) |
-| Generate SEO content | `scripts/seo-content.js` | [use-cases.md](references/use-cases.md) |
-| Build full landing page | `scripts/build-page.js` | [use-cases.md](references/use-cases.md) |
+| Generate SEO + design brief | `scripts/seo-content.js` | [use-cases.md](references/use-cases.md) |
+| Build full landing page (uses brand design tokens) | `scripts/build-page.js` | [use-cases.md](references/use-cases.md) |
+
+### SEO + landing-page input model
+
+When the user wants SEO content or a landing page, ALWAYS gather these before running anything:
+
+1. **Target keyword** (required) — what to rank for.
+2. **Brand reference** (strongly recommended) — either a `--brand-url <url>` OR `--brand-files "<glob>"` (CSS / HTML / JSX / MD). Without this, the page won't match the user's design.
+3. **Research reference** (optional) — `--research-url <url>` of a competitor or top-ranking page for SERP-intent signal.
+4. **Voice description** (optional) — `--voice "<short description>"`.
+
+`scripts/seo-content.js` produces `brief.json`. It includes `design_system` (palette / fonts / CSS vars / max-widths) extracted from the brand reference. Claude then reads the brief and writes `page-spec.json`. `build-page.js` consumes the `design` block in `page-spec.json` and applies it as CSS variables (`--fg`, `--bg`, `--accent`, `--font-body`, `--font-heading`, `--container`).
+
+If the user does NOT provide a brand reference, ask for one before generating the page. Don't guess colors/fonts.
 
 ## SDK pattern (memorize this)
 

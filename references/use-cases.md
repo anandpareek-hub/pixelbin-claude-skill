@@ -61,27 +61,42 @@ See [`examples/bulk-ecom.example.js`](../examples/bulk-ecom.example.js).
 
 ---
 
-## 5. Generate a humanized SEO landing page from your URL
+## 5. Generate a humanized SEO landing page (matched to your brand)
 
 **You say:**
-> *"Build a landing page for 'AI-generated logos for startups'. My current site is example.com — match that style."*
+> *"Build a landing page for 'AI-generated logos for startups'. My current site is example.com — match that style and visuals."*
+
+**Inputs you can mix:**
+- `--keyword "AI-generated logos for startups"` — target keyword (required)
+- `--research-url https://competitor.com/ai-logos` — *optional* competitor for SERP intent
+- `--brand-url https://example.com` — *your* site for design system extraction
+- `--brand-files "./src/styles/*.css ./src/app/**/*.tsx"` — local files instead of (or with) URL
 
 **What happens:**
-1. `seo-content.js --url https://example.com --keyword "AI-generated logos for startups"` extracts existing copy + brand cues into a brief.
-2. Claude reads the brief and produces a `page-spec.json`:
+1. `node scripts/seo-content.js --keyword "AI-generated logos for startups" --brand-url https://example.com --out brief.json` — produces `brief.json` containing:
+   - SEO deliverables spec (title/meta/H1/outline/body rules/humanization checklist)
+   - **`design_system`** extracted from your brand: palette (top hex colors), CSS variables, fonts, max-widths, Tailwind hints
+   - Optional research excerpt from competitor URL
+2. Claude reads `brief.json` and produces `page-spec.json` containing:
    - Humanized title, meta, H1, intro, sections (5–8), FAQs (5–7)
-   - 4–6 image jobs (hero + section visuals) matching the brand
-3. Run `generate-image.js --jobs <(echo $image_jobs_json)` and `upload.js`.
-4. `build-page.js --spec ./page-spec.json --out ./dist/index.html` — outputs a self-contained HTML page with embedded JSON-LD (`WebPage` + `FAQPage`) and PixelBin CDN images.
+   - 4–6 image jobs whose prompts reference your brand's visual style
+   - A `design` block — picked from the extracted `design_system` — with the exact CSS values to use (`fg`, `bg`, `accent`, `font_body`, `font_heading`, `container`)
+3. Run `node scripts/generate-image.js --jobs ...` and `node scripts/upload.js` to fill in `image_urls`.
+4. `node scripts/build-page.js --spec ./page-spec.json --out ./dist/index.html` — outputs a self-contained HTML page whose CSS variables are populated from your design system, with embedded `WebPage` + `FAQPage` JSON-LD and PixelBin CDN images.
+
+The result *looks like your site*, not a generic template.
 
 ---
 
-## 6. Generate a humanized SEO page from your code
+## 6. Generate humanized SEO content with code/files as the brand reference
 
 **You say:**
-> *"Here's my JSX file. Generate humanized SEO content + visuals for it."*
+> *"Here are my CSS + JSX files. Generate humanized SEO content + visuals for keyword X."*
 
-**What happens:** Same as #5 but with `seo-content.js --file ./component.jsx`. The script extracts visible text (or treats raw markdown/JSX as the source) and Claude writes humanized copy referencing the existing structure.
+**What happens:** Same as #5 but with `--brand-files "./src/styles/*.css ./src/app/page.tsx"` (or any glob). The script reads every file, extracts hex colors / fonts / max-widths / CSS variables, and includes them in the brief so Claude can match the design.
+
+**Combine both:**
+> `node scripts/seo-content.js --keyword "X" --brand-url https://yoursite.com --brand-files "./design-tokens.css"` — pulls from both. URL gives you the rendered HTML, files give you the source-of-truth design tokens.
 
 ---
 
