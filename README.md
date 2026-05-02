@@ -178,6 +178,8 @@ Install like you would `superpowers` — via the Claude Code plugin marketplace:
 /plugin install pixelbin@pixelbin-claude-skill
 ```
 
+> 🛠 **Requires Claude Code with plugin support.** If you see `Unknown skill: plugin`, your CLI is too old. Update with `npm i -g @anthropic-ai/claude-code` and restart your session, then retry. If `/plugin` still isn't recognized, use **Option B** (symlink) below.
+
 That gives you, immediately:
 - The `/pixelbin` slash command
 - The `pixelbin` skill auto-triggered when you say things like *"generate AI images via PixelBin"*, *"build a media pipeline"*, etc.

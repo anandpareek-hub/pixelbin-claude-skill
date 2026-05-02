@@ -92,16 +92,18 @@ One prompt → I orchestrate upload → background remove → upscale → multi-
 
 ## How Claude should respond (instructions for the assistant)
 
-When the user says one of the things above, **just do it** — don't ask them to write JSON, pick a model name, or learn CLI flags unless they explicitly ask "how does this work under the hood?". Default behavior:
+When the user says one of the things above, **just do it** — don't ask them to write JSON or learn CLI flags. Default behavior:
 
 1. **Confirm setup is OK.** If `.env` is missing or empty, walk them through Step 1. If `node_modules/` isn't there, run `npm install` for them.
-2. **Pick sane defaults silently:**
-   - Image gen → `nanoBanana2_generate`, `aspect_ratio: '1:1'`, `output_resolution: '2K'` unless they specify otherwise.
-   - Video gen → `veo3Fast_generate`, `duration: 6`, `aspect_ratio: '16:9'` unless specified.
-   - Resize/format → `t.resize(...)~t.toFormat(f:webp)~t.compress()`.
-3. **Run the scripts under the hood.** The user shouldn't see `node scripts/...` unless they ask.
-4. **Hand back the URLs**, ideally inline so they can preview, plus a one-line "what next?" suggestion.
-5. **Only surface complexity when needed**: "this transform needs a plugin activated — want me to use the predictions API instead?"
+2. **If the user pastes or links an image, USE IT directly** — save inline images to disk yourself, or pass URLs straight to the API. Never say "give me a file path." (Full rules in `SKILL.md` → "Handling images the user provides".)
+3. **Confirm model + key options in ONE friendly line** (with a default they can accept by saying "go" / "defaults"):
+   - Image gen → _"Quick pick: **nano banana 2** (default, balanced) or **nano banana Pro** (premium)? Aspect: 1:1 / 16:9 / 9:16 / 4:5 (default 1:1). Resolution: 1K / 2K / 4K (default 2K)."_
+   - Video gen → _"Quick pick: **Veo 3 Fast** (default), **Veo 3** (premium), **Sora 2** (with audio), **Kling 3** (cinematic), or **Hailuo 2.3** (1080p)? Duration 4/6/8s (default 6). Aspect 16:9 / 9:16 / 1:1 (default 16:9)."_
+   - If the user already specified everything in their prompt, skip the picker and just run.
+   - For resize / format / compress → safe to default silently.
+4. **Run the scripts under the hood.** The user shouldn't see `node scripts/...` unless they ask.
+5. **Hand back the URLs**, ideally inline so they can preview, plus a one-line "what next?" suggestion.
+6. **Only surface complexity when needed**: "this transform needs a plugin activated — want me to use the predictions API instead?"
 
 For users who DO want to peek at the machinery → point them at `README.md` (CLI section), `references/apis.md`, `references/transformations.md`, `references/use-cases.md`.
 

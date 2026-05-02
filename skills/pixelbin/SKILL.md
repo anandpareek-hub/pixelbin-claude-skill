@@ -24,10 +24,11 @@ Read [`INTRO.md`](INTRO.md) before responding. INTRO.md is the user-facing voice
 
 **If the user has already stated a clear goal** (e.g. "generate 6 hero images for X", "remove backgrounds from these photos", "build a landing page for Y"):
 1. Confirm `.env` and `node_modules/` are ready (see Setup check below) — auto-fix silently if you can.
-2. Pick sane defaults — DO NOT make the user choose models, flags, or aspect ratios unless they care.
-   - Image gen → `nanoBanana2_generate`, `aspect_ratio: '1:1'`, `output_resolution: '2K'`
-   - Video gen → `veo3Fast_generate`, `duration: 6`, `aspect_ratio: '16:9'`
-   - Resize/format → `t.resize(...)~t.toFormat(f:webp)~t.compress()`
+2. **Confirm model + key options in ONE friendly line** (don't make them write JSON — give a default they can accept with "go"):
+   - **Image gen:** _"Quick pick: **nano banana 2** (default, balanced) or **nano banana Pro** (premium quality, slower)? Aspect: 1:1 / 16:9 / 9:16 / 4:5 (default 1:1). Resolution: 1K / 2K / 4K (default 2K). Or just say 'defaults' and I'll use nano banana 2 · 1:1 · 2K."_
+   - **Video gen:** _"Quick pick: **Veo 3 Fast** (default, balanced cost), **Veo 3** (premium), **Sora 2** (with audio), **Kling 3** (cinematic), or **Hailuo 2.3** (1080p)? Duration: 4 / 6 / 8s (default 6). Aspect: 16:9 / 9:16 / 1:1 (default 16:9)."_
+   - **Resize/format:** safe to default silently → `t.resize(...)~t.toFormat(f:webp)~t.compress()`.
+   - If the user already specified everything in their prompt, skip the picker and just run.
 3. Run the right scripts under the hood and hand back CDN URLs.
 
 **If the user is just exploring** ("hi", "what can you do?", "help"):
@@ -36,6 +37,19 @@ Read [`INTRO.md`](INTRO.md) before responding. INTRO.md is the user-facing voice
 3. Invite them to just say what they want in plain English. No CLI talk.
 
 **Default to chat-first.** Don't expose CLI flags, JOBS arrays, model names, or transform syntax unless the user asks "how does this work?". Run scripts silently; report results visually.
+
+## Handling images the user provides (CRITICAL)
+
+When the user references an image, **you must obtain it yourself** — never ask them to "give me a file path" or "save it to Downloads". The image is already accessible to you in one of these forms:
+
+| What the user did | What you do |
+| --- | --- |
+| **Pasted an image inline in the chat** | The image is in your conversation context. Use the `Write` tool to save the bytes to `./scripts/_inputs/<slug>.<ext>`, then upload it via `pixelbin.assets.fileUpload({ file: fs.createReadStream(...) })` to get a permanent CDN URL. Pass that URL into `images: [...]` for the prediction. |
+| **Gave you a public URL** (e.g. `https://example.com/photo.jpg`, a CDN URL, a Slack/Drive public link) | Two options:<br>• **Quick path** — pass the URL straight into `images: [url]` of `pixelbin.predictions.createAndWait` (most models accept a URL). No upload needed.<br>• **Permanent path** — call `pixelbin.assets.urlUpload({ url, path: '<folder>', name: '<slug>', access: 'public-read' })` to store it in PixelBin DAM, then use the resulting CDN URL. |
+| **Gave a local path** (`~/Downloads/photo.jpg`, `./photo.jpg`) | Use `pixelbin.assets.fileUpload({ file: fs.createReadStream(absPath), ... })`. |
+| **Mentioned an image but didn't attach or link it** | _Now_ ask — but politely: _"Drop the image into the chat or paste a URL — I'll handle the rest."_ |
+
+**Never** say "the inline image isn't saved on disk, please paste the path" — that's a user-experience failure. Saving inline image bytes to disk is your job, not theirs.
 
 ## Setup check (always do this first)
 
