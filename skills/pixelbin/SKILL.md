@@ -51,6 +51,50 @@ When the user references an image, **you must obtain it yourself** — never ask
 
 **Never** say "the inline image isn't saved on disk, please paste the path" — that's a user-experience failure. Saving inline image bytes to disk is your job, not theirs.
 
+## Cost-aware path selection (CRITICAL)
+
+**Before reaching for a generation model, decide whether the task needs generation at all.** Generation models are the most expensive op in the stack. For most product / e-commerce / variant tasks, you can do the same job with a cheap prediction + free URL transforms.
+
+### Decision tree
+
+| User intent | Cheap path (use this) | Expensive path (avoid unless asked) |
+| --- | --- | --- |
+| **"Same product, white bg, marketplace-ready"** (Amazon, Shopify, Flipkart, etc.) | 1. `erase_bg` prediction → transparent PNG<br>2. Upload to DAM<br>3. URL transform: `t.extend(...,bc:ffffff)~t.resize(h:H,w:W)~t.toFormat(f:webp)~t.compress()` | nanoBanana regenerate (loses product fidelity, ~10× cost) |
+| **"Resize / reformat / compress / different aspect ratio"** for an existing image | URL transforms only — `t.resize`, `t.toFormat`, `t.compress`, `t.extend` (free, just CDN params) | Regeneration |
+| **"Upscale to 4K"** | `vsr_upscale` prediction (or `t.resize` if source is large enough) | Regeneration at higher res |
+| **"Remove watermark"** | `wm_remove` / `wmrPro_remove` / `wmrMax_remove` prediction | Regeneration |
+| **"Remove background and place on new scene"** | `erase_bg` + composite via `t.merge` / generation only for the new background | Full regeneration of the whole image |
+| **"Generate a NEW scene / NEW product shot / hero image from scratch"** | Generation model (nanoBanana 2 / Pro) — this is the right tool | — |
+| **"Variants of the same hero (color, angle, style change)"** | Image-to-image with `nanoBanana2_generate` + `images:[ref]` (preserves identity) | Text-only regeneration (loses identity) |
+
+### Cost ranking (rough, lower → cheaper)
+1. **URL transforms** — free, no API call
+2. **Plugin transforms** in URL (when activated) — free per request, included in plan
+3. **Predictions: `erase_bg`, `wm_remove`, `vsr_upscale`** — small per-call credit cost
+4. **Image generation** — `nanoBanana_generate` < `nanoBanana2_generate` < `nanoBananaPro_generate`
+5. **Video generation** — most expensive op; always confirm before spending
+
+### Worked example — "Amazon + Shopify + Instagram-ready, white bg, 4K, 1:1 + 9:16"
+
+**Wrong** (what NOT to do): regenerate each variant with nanoBanana — 12 outputs × generation cost, plus product hallucination risk.
+
+**Right** (default behavior):
+```
+For each source image:
+  1. urlUpload(source)                                        → CDN URL
+  2. predictions.createAndWait({ name: 'erase_bg', input: { image: cdnUrl } })  → transparent PNG
+  3. urlUpload(eraseBgOutput)                                 → CDN URL of transparent product
+  4. Build transform URLs (no API call):
+     • Amazon 1:1   t.extend(t:200,r:200,b:200,l:200,bc:ffffff)~t.resize(h:2048,w:2048)~t.toFormat(f:jpeg)~t.compress()
+     • Shopify 1:1  t.extend(t:150,r:150,b:150,l:150,bc:ffffff)~t.resize(h:2048,w:2048)~t.toFormat(f:webp)~t.compress()
+     • Instagram 9:16  t.extend(t:600,r:200,b:600,l:200,bc:ffffff)~t.resize(h:1920,w:1080)~t.toFormat(f:webp)~t.compress()
+```
+
+This costs **~1 prediction per source image**, vs **3 generations per source**. Same visual result, fraction of the credits, zero product drift.
+
+### When in doubt — ask the user
+If a task is borderline (e.g. "make this look more premium" — could be a transform or a regen), say in one line: _"I can either (a) clean + restyle the existing photo with bg-remove + transforms (~1 credit each, preserves the actual product) or (b) regenerate hero shots with nano banana 2 (higher cost, more creative freedom). Which do you want?"_
+
 ## Setup check (always do this first)
 
 Before running any script, verify:
