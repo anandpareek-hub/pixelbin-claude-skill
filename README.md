@@ -9,7 +9,9 @@
 
 # PixelBin Claude Skill
 
-**Turn Claude into a full media pipeline — generate, transform, store, and deliver images & videos at scale.**
+**Turn Claude into a full media pipeline for AI image generation, AI video generation, image transformation, background removal, watermark removal, image upscaling, and bulk image processing — backed by a global image CDN and DAM.**
+
+> Claude skill for AI image generation (nanoBanana / nanoBanana 2 / nanoBanana Pro), AI video generation (Sora 2, Veo 3, Kling 3, Hailuo, Seedance, LTX-2, Wan 2.5), 60+ chainable image transformation operations (resize, crop, WebP/AVIF format conversion, watermark, compress, sharpen, smart-crop), background remover, watermark remover, AI image upscaler, photo restoration, colorization, OCR, image editing, and image-to-video — delivered over a built-in CDN with DAM.
 
 [![Get API Key](https://img.shields.io/badge/Get_API_Key-Free_Tier-2563eb?style=for-the-badge)](https://www.pixelbin.io/?utm_source=github&utm_medium=claude-skill&utm_campaign=signup)
 [![Pricing](https://img.shields.io/badge/Pricing-View_Plans-10b981?style=for-the-badge)](https://www.pixelbin.io/pricing?utm_source=github&utm_medium=claude-skill&utm_campaign=pricing)
@@ -78,20 +80,20 @@ Most AI-media skills give Claude a single API call. PixelBin gives Claude a **pr
 
 ## 🧰 What's inside
 
-### 1. **85+ AI APIs** — every media operation you need
-   Image generation (nanoBanana, nanoBanana 2, nanoBanana Pro), video generation (Sora 2, Veo 3, Kling 3, Hailuo, Seedance, LTX-2, Wan 2.5), background removal, watermark removal, image/video upscaling, OCR, photo restoration, colorization, image expansion, relighting, object removal, frame interpolation, captioning, sketch-to-image, image-to-video, and more. → [`references/apis.md`](references/apis.md)
+### 1. **85+ AI APIs for image generation, video generation & editing**
+   AI image generation (nanoBanana, nanoBanana 2, nanoBanana Pro), AI video generation (Sora 2, Veo 3, Kling 3, Hailuo, Seedance, LTX-2, Wan 2.5), background removal, watermark removal, AI image upscaling, video upscaling, OCR, photo restoration, colorization, image expansion (outpainting), AI relighting, object removal, frame interpolation, image captioning, sketch-to-image, image-to-video, AI photo editor, and more. → [`references/apis.md`](references/apis.md)
 
-### 2. **60+ URL transformations** — composable, free, instant
-   Resize, crop, format conversion (WebP/AVIF), quality, watermark, blur, sharpen, brightness, saturation, rotation, padding, tinting, smart-crop, focal-point cropping, art presets, and more — all chainable in a single URL. → [`references/transformations.md`](references/transformations.md)
+### 2. **60+ image transformation operations** — chainable in one URL
+   Image resize, crop, format conversion (WebP / AVIF / JPEG / PNG), quality / compression, watermark, blur, sharpen, brightness, saturation, rotation, padding, tinting, smart-crop, focal-point cropping, art-style presets, and more — all chainable in a single CDN URL with no extra API call. → [`references/transformations.md`](references/transformations.md)
 
-### 3. **Built-in CDN** — global edge delivery
-   Every uploaded asset gets a `cdn.pixelbin.io/v2/...` URL: HTTP/3, edge caching, signed URLs, custom domains. → [`references/cdn.md`](references/cdn.md)
+### 3. **Built-in image & video CDN** — global edge delivery
+   Every uploaded asset gets a `cdn.pixelbin.io/v2/...` URL with HTTP/3, edge caching, signed URLs, and custom domains — production-grade image CDN and video CDN out of the box. → [`references/cdn.md`](references/cdn.md)
 
-### 4. **DAM (Digital Asset Management)** — your media library, organized
-   Folders, tags, search, access controls (`public-read` / `private`), bulk ops, metadata. Manage thousands of assets without spinning up your own storage layer.
+### 4. **DAM (Digital Asset Management)** for images & videos
+   Folders, tags, full-text search, access controls (`public-read` / `private`), bulk ops, metadata. Manage thousands of images and videos without spinning up your own storage layer.
 
-### 5. **Bulk pipelines** — built for scale
-   Concurrency-safe batch runners, resumable jobs, progress checkpointing. Generate 500 images while you sleep. Transform 10,000 product shots in a script.
+### 5. **Bulk image processing & batch pipelines**
+   Concurrency-safe batch runners, resumable jobs, progress checkpointing. Bulk image generation (500+ images while you sleep), bulk image transformation (10,000+ product shots in a script), bulk background removal, bulk watermark removal, bulk image upscaling.
 
 ---
 
@@ -274,6 +276,34 @@ When Claude hits an `Insufficient credits` error, it will surface the upgrade li
 
 ---
 
+## ❓ FAQ
+
+### What is the PixelBin Claude Skill?
+A Claude Code skill (and slash command `/pixelbin`) that gives Claude direct access to PixelBin's media stack: 85+ AI APIs for image generation, video generation, and image editing; 60+ chainable image transformation operations; built-in CDN for image and video delivery; and DAM for asset management.
+
+### Which AI image generation models does it support?
+nanoBanana, nanoBanana 2, and nanoBanana Pro — covering fast drafts through hero-tier product photography. Claude picks the right model for the task or asks the user when ambiguous.
+
+### Which AI video generation models does it support?
+Sora 2, Veo 3 / Veo 3 Fast, Kling 3, Hailuo, Seedance, LTX-2, and Wan 2.5 — text-to-video and image-to-video, including reels, ads, product motion, and cinematic clips.
+
+### What image transformations can I chain in a single URL?
+Resize, crop, format conversion (WebP, AVIF, JPEG, PNG), compression / quality, watermark, blur, sharpen, brightness, saturation, rotation, padding, tinting, smart-crop, focal-point cropping, and art-style presets — all composable in one `cdn.pixelbin.io/v2/...` URL with zero per-call cost.
+
+### Can I do bulk image processing with this skill?
+Yes — bulk image generation, bulk background removal, bulk watermark removal, bulk AI image upscaling, and bulk image transformation are all first-class. Batch runners are concurrency-safe and resumable, so 500–10,000 image jobs survive crashes.
+
+### How does the image CDN work?
+Every asset uploaded via `scripts/upload.js` (or the PixelBin SDK) gets a permanent `cdn.pixelbin.io/v2/<cloud>/<transformations>/<path>` URL served from a global edge network with HTTP/3, signed URLs, and custom-domain support.
+
+### Is there a free tier?
+Yes — PixelBin offers a free tier with monthly credits for image generation, transformations, and CDN delivery. → [Sign up free](https://www.pixelbin.io/?utm_source=github&utm_medium=claude-skill&utm_campaign=faq).
+
+### How is this different from a generic AI image generation API?
+Generic APIs return one-off images. PixelBin returns CDN-hosted, transformable images: upload once, transform infinitely via URL params, and serve at edge. It's an image generation API + image transformation API + image CDN + DAM in one — built for production media pipelines, not single API calls.
+
+---
+
 ## 📚 Reference docs
 
 - [`SKILL.md`](SKILL.md) — Claude-facing skill manifest (how Claude uses this)
@@ -308,11 +338,52 @@ MIT — see [LICENSE](LICENSE).
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": "PixelBin Claude Skill",
+  "alternateName": ["PixelBin AI Image & Video Skill for Claude", "PixelBin Media Pipeline Skill"],
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "Cross-platform",
-  "description": "Claude Code skill that turns Claude into a full media pipeline using PixelBin's 85+ AI APIs, 60+ URL transformations, built-in CDN, and DAM.",
+  "description": "Claude Code skill for AI image generation, AI video generation, image transformation, background removal, watermark removal, image upscaling, photo restoration, OCR, bulk image processing, and image CDN delivery — powered by PixelBin's 85+ AI APIs and 60+ URL transformations.",
+  "keywords": "image generation, AI image generation, image transformation, video generation, AI video generation, background removal, watermark removal, image upscaling, image CDN, image API, bulk image processing, DAM, digital asset management, Claude skill, Claude Code plugin, nanoBanana, Sora 2, Veo 3, Kling 3, photo restoration, image editing API",
   "url": "https://github.com/anandpareek-hub/pixelbin-claude-skill",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
   "creator": { "@type": "Organization", "name": "PixelBin", "url": "https://www.pixelbin.io" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the PixelBin Claude Skill?",
+      "acceptedAnswer": { "@type": "Answer", "text": "A Claude Code skill that gives Claude direct access to PixelBin's media stack: 85+ AI APIs for image generation, video generation, and image editing; 60+ chainable image transformation operations; built-in CDN for image and video delivery; and DAM for asset management." }
+    },
+    {
+      "@type": "Question",
+      "name": "Which AI image generation models does it support?",
+      "acceptedAnswer": { "@type": "Answer", "text": "nanoBanana, nanoBanana 2, and nanoBanana Pro — covering fast drafts through hero-tier product photography." }
+    },
+    {
+      "@type": "Question",
+      "name": "Which AI video generation models does it support?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sora 2, Veo 3 / Veo 3 Fast, Kling 3, Hailuo, Seedance, LTX-2, and Wan 2.5 — text-to-video and image-to-video for reels, ads, product motion, and cinematic clips." }
+    },
+    {
+      "@type": "Question",
+      "name": "What image transformations can be chained in a single URL?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Resize, crop, format conversion (WebP, AVIF, JPEG, PNG), compression, watermark, blur, sharpen, brightness, saturation, rotation, padding, tinting, smart-crop, focal-point cropping, and art-style presets — all composable in one cdn.pixelbin.io/v2/... URL with zero per-call cost." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I do bulk image processing with this skill?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes — bulk image generation, bulk background removal, bulk watermark removal, bulk AI image upscaling, and bulk image transformation are all supported via concurrency-safe, resumable batch runners." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a free tier?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes — PixelBin offers a free tier with monthly credits for image generation, transformations, and CDN delivery." }
+    }
+  ]
 }
 </script>
